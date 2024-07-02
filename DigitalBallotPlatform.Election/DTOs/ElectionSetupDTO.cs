@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using DigitalBallotPlatform.Election.Models;
+using System.Globalization;
 
 namespace DigitalBallotPlatform.Election.DTOs
 {
@@ -8,10 +9,11 @@ namespace DigitalBallotPlatform.Election.DTOs
 
         public int Id { get; set; }
         public DateTime ElectionDate { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public int WatermarkId { get; set; }
         public int CountyId { get; set; }
         public int BallotSpecsId { get; set; }
+        public List<PartyDTO> Parties { get; set; } = new();
 
         public string FormattedDate
         {
@@ -30,6 +32,7 @@ namespace DigitalBallotPlatform.Election.DTOs
             }
         }
 
+        public ElectionSetupDTO() { }
         public ElectionSetupDTO(int id, DateTime electionDate, string description, int watermarkId, int countyId, int ballotSpecsId)
         {
             Id = id;

@@ -1,4 +1,4 @@
-﻿namespace DigitalBallotPlatform.Domain.DTOs
+﻿namespace DigitalBallotPlatform.Platform.DTOs
 {
     public class PlatformUserDTO
     {

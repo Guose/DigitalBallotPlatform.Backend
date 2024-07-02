@@ -18,7 +18,7 @@ namespace DigitalBallotPlatform.Shared.Models
 
 
         public int? ColorId { get; set; }
-       public WatermarkColorModel? Color { get; set; }
+        public WatermarkColorModel? Color { get; set; }
         public int? ElectionId { get; set; }
         public ElectionSetupModel? Election { get; set; }
     }
