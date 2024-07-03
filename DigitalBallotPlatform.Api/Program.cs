@@ -27,7 +27,6 @@ namespace DigitalBallotPlatform.Api
             // Add services to the container.
             builder.Services.AddSingleton<ILogger, Logger>();
 
-
             builder.Services.AddControllers()
                 .AddNewtonsoftJson(settings =>
                 {
@@ -73,7 +72,6 @@ namespace DigitalBallotPlatform.Api
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();
@@ -88,10 +86,17 @@ namespace DigitalBallotPlatform.Api
             {
                 var criteria = Encoding.UTF8.GetString(buffer, 0, result.Count);
                 var filteredData = ApplyCriteria(criteria);
+
+                var serverMsg = Encoding.UTF8.GetBytes(filteredData);
+                await webSocket.SendAsync(new ArraySegment<byte>(serverMsg, 0, serverMsg.Length), result.MessageType, result.EndOfMessage, CancellationToken.None);
+
+                result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
             }
+
+            await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
         }
 
-        private static object ApplyCriteria(string criteria)
+        private static string ApplyCriteria(string criteria)
         {
             return $"Needs to be implemented on how were going to pass in criteria: {criteria}";
         }

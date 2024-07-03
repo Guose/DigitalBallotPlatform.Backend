@@ -25,6 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalBallotPlatform.Water
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalBallotPlatform.Platform", "DigitalBallotPlatform.Platform\DigitalBallotPlatform.Platform.csproj", "{AF656433-0857-436D-B831-28835D5A0C00}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7DCC71CC-8B31-46B0-A55F-6909EDA4F27F}"
+	ProjectSection(SolutionItems) = preProject
+		Infrastructure\docker-compose.yaml = Infrastructure\docker-compose.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
