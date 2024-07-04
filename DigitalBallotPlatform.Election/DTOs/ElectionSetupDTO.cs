@@ -34,7 +34,7 @@ namespace DigitalBallotPlatform.Election.DTOs
         }
 
         public ElectionSetupDTO() { }
-        public ElectionSetupDTO(int id, DateTime electionDate, string description, int watermarkId, int countyId, int ballotSpecsId, List<PartyDTO> parties)
+        public ElectionSetupDTO(int id, DateTime electionDate, string description, int watermarkId, int countyId, int ballotSpecsId)
         {
             Id = id;
             ElectionDate = electionDate;
@@ -42,12 +42,11 @@ namespace DigitalBallotPlatform.Election.DTOs
             WatermarkId = watermarkId;
             CountyId = countyId;
             BallotSpecsId = ballotSpecsId;
-            Parties = parties;
         }
 
-        public static ElectionSetupDTO MapElectionSetupEntity(ElectionSetupModel electionSetup)
+        public static Task<ElectionSetupDTO> MapElectionSetupEntity(ElectionSetupModel electionSetup)
         {
-            return new ElectionSetupDTO
+            return Task.Run(() => new ElectionSetupDTO
             {
                 Id = electionSetup.Id,
                 ElectionDate = electionSetup.ElectionDate,
@@ -56,12 +55,12 @@ namespace DigitalBallotPlatform.Election.DTOs
                 CountyId = electionSetup.CountyId,
                 BallotSpecsId = electionSetup.BallotSpecsId,
                 // Parties = [.. electionSetup.Parties]
-            };
+            });
         }
 
-        public static ElectionSetupModel MapElectionSetupDTO(ElectionSetupDTO electionSetupDTO)
+        public static Task<ElectionSetupModel> MapElectionSetupDTO(ElectionSetupDTO electionSetupDTO)
         {
-            return new ElectionSetupModel
+            return Task.Run(() => new ElectionSetupModel
             {
                 Id = electionSetupDTO.Id,
                 ElectionDate = electionSetupDTO.ElectionDate,
@@ -70,7 +69,7 @@ namespace DigitalBallotPlatform.Election.DTOs
                 CountyId = electionSetupDTO.CountyId,
                 BallotSpecsId = electionSetupDTO.BallotSpecsId,
                 // Parties = [.. electionSetupDTO.Parties]
-            };
+            });
         }
     }
 }

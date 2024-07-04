@@ -24,7 +24,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 if (electionSetup == null)
                     return false;
 
-                electionSetup = ElectionSetupDTO.MapElectionSetupDTO(electionSetupDTO);
+                electionSetup = await ElectionSetupDTO.MapElectionSetupDTO(electionSetupDTO);
 
                 Context.ElectionSetups.Update(electionSetup);
                 await SaveAsync();
@@ -48,7 +48,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 ElectionSetupModel? electionSetup = await Context.ElectionSetups.FirstOrDefaultAsyncEF(e => e.Id == id);
 
                 if (electionSetup != null)
-                    return ElectionSetupDTO.MapElectionSetupEntity(electionSetup);
+                    return await ElectionSetupDTO.MapElectionSetupEntity(electionSetup);
 
                 return null;
             }
