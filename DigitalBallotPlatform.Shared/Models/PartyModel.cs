@@ -1,11 +1,13 @@
 ﻿using DigitalBallotPlatform.Shared.Types;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DigitalBallotPlatform.Shared.Models
 {
     public class PartyModel
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; } = string.Empty;
@@ -13,7 +15,6 @@ namespace DigitalBallotPlatform.Shared.Models
         public string Acronym { get; set; } = string.Empty;
         [Required]
         public string Abbreviations { get; set; } = string.Empty;
-        public bool IsHeaderFile { get; set; } = false;
         public WatermarkType? WatermarkType { get; set; }
 
 

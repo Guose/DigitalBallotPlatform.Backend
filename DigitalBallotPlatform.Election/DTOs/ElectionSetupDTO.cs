@@ -1,4 +1,5 @@
 ﻿using DigitalBallotPlatform.Election.Models;
+using DigitalBallotPlatform.Shared.Models;
 using System.Globalization;
 
 namespace DigitalBallotPlatform.Election.DTOs
@@ -13,7 +14,7 @@ namespace DigitalBallotPlatform.Election.DTOs
         public int WatermarkId { get; set; }
         public int CountyId { get; set; }
         public int BallotSpecsId { get; set; }
-        public List<PartyDTO> Parties { get; set; } = new();
+        public List<PartyDTO>? Parties { get; set; }
 
         public string FormattedDate
         {
@@ -33,7 +34,7 @@ namespace DigitalBallotPlatform.Election.DTOs
         }
 
         public ElectionSetupDTO() { }
-        public ElectionSetupDTO(int id, DateTime electionDate, string description, int watermarkId, int countyId, int ballotSpecsId)
+        public ElectionSetupDTO(int id, DateTime electionDate, string description, int watermarkId, int countyId, int ballotSpecsId, List<PartyDTO> parties)
         {
             Id = id;
             ElectionDate = electionDate;
@@ -41,6 +42,35 @@ namespace DigitalBallotPlatform.Election.DTOs
             WatermarkId = watermarkId;
             CountyId = countyId;
             BallotSpecsId = ballotSpecsId;
+            Parties = parties;
+        }
+
+        public static ElectionSetupDTO MapElectionSetupEntity(ElectionSetupModel electionSetup)
+        {
+            return new ElectionSetupDTO
+            {
+                Id = electionSetup.Id,
+                ElectionDate = electionSetup.ElectionDate,
+                Description = electionSetup.Description,
+                WatermarkId = electionSetup.WatermarkId,
+                CountyId = electionSetup.CountyId,
+                BallotSpecsId = electionSetup.BallotSpecsId,
+                // Parties = [.. electionSetup.Parties]
+            };
+        }
+
+        public static ElectionSetupModel MapElectionSetupDTO(ElectionSetupDTO electionSetupDTO)
+        {
+            return new ElectionSetupModel
+            {
+                Id = electionSetupDTO.Id,
+                ElectionDate = electionSetupDTO.ElectionDate,
+                Description = electionSetupDTO.Description,
+                WatermarkId = electionSetupDTO.WatermarkId,
+                CountyId = electionSetupDTO.CountyId,
+                BallotSpecsId = electionSetupDTO.BallotSpecsId,
+                // Parties = [.. electionSetupDTO.Parties]
+            };
         }
     }
 }

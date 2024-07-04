@@ -7,12 +7,13 @@ namespace DigitalBallotPlatform.Shared.Models
     public class ElectionSetupModel
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
         [Column(TypeName = "date")]
         public DateTime ElectionDate { get; set; }
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; }
 
         [Required]
         [ForeignKey(nameof(WatermarkId))]

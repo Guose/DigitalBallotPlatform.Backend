@@ -21,7 +21,7 @@ namespace DigitalBallotPlatform.Domain.ServiceHelpers
 
         public async Task<ElectionWithBallotComposite> GetElectionWithBallotSpecAsync(int electionId)
         {
-            var election = await electionDbContext.ElectionSetup
+            var election = await electionDbContext.ElectionSetups
                 .Include(e => e.Watermark)
                 .Include(e => e.County)
                 .Include(e => e.Parties)
