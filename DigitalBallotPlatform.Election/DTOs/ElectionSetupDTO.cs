@@ -44,7 +44,7 @@ namespace DigitalBallotPlatform.Election.DTOs
             BallotSpecsId = ballotSpecsId;
         }
 
-        public static Task<ElectionSetupDTO> MapElectionSetupEntity(ElectionSetupModel electionSetup)
+        public static Task<ElectionSetupDTO> MapElectionSetupDTO(ElectionSetupModel electionSetup)
         {
             return Task.Run(() => new ElectionSetupDTO
             {
@@ -58,7 +58,7 @@ namespace DigitalBallotPlatform.Election.DTOs
             });
         }
 
-        public static Task<ElectionSetupModel> MapElectionSetupDTO(ElectionSetupDTO electionSetupDTO)
+        public static Task<ElectionSetupModel> MapElectionSetupModel(ElectionSetupDTO electionSetupDTO)
         {
             return Task.Run(() => new ElectionSetupModel
             {

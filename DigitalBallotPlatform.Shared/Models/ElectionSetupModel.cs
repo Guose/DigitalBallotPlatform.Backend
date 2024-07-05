@@ -32,6 +32,7 @@ namespace DigitalBallotPlatform.Shared.Models
 
         public List<PartyModel> Parties { get; set; } = new List<PartyModel>();
 
+
         private string? _formattedDate;
         [NotMapped]
         public string FormattedDate

@@ -6,11 +6,11 @@ using LinqToDB;
 
 namespace DigitalBallotPlatform.Election.Queries
 {
-    public class GetElectionSetupQuery : IRetrieveQuery<ElectionSetupDTO>
+    public class ElectionSetupRetrieveQuery : IRetrieveQuery<ElectionSetupDTO>
     {
         private readonly ElectionDbContextFactory dbContextFactory;
 
-        public GetElectionSetupQuery(ElectionDbContextFactory dbContextFactory)
+        public ElectionSetupRetrieveQuery(ElectionDbContextFactory dbContextFactory)
         {
             this.dbContextFactory = dbContextFactory;
         }

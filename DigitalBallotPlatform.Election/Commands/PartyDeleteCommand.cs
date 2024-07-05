@@ -5,11 +5,11 @@ using LinqToDB;
 
 namespace DigitalBallotPlatform.Election.Commands
 {
-    public class DeleteElectionSetupCommand : IDeleteCommand
+    public class PartyDeleteCommand : IDeleteCommand
     {
         private readonly ElectionDbContextFactory electionDbContextFactory;
 
-        public DeleteElectionSetupCommand(ElectionDbContextFactory electionDbContextFactory)
+        public PartyDeleteCommand(ElectionDbContextFactory electionDbContextFactory)
         {
             this.electionDbContextFactory = electionDbContextFactory;
         }
@@ -18,11 +18,11 @@ namespace DigitalBallotPlatform.Election.Commands
         {
             using (var context = electionDbContextFactory.Create())
             {
-                ElectionSetupModel electionSetup = await context.ElectionSetups.FirstAsync(e => e.Id == id);
+                PartyModel party = await context.Parties.FirstAsync(p => p.Id == id);
 
-                if (electionSetup != null)
+                if (party != null)
                 {
-                    context.ElectionSetups.Remove(electionSetup);
+                    context.Parties.Remove(party);
                     await context.SaveChangesAsync();
                     return true;
                 }

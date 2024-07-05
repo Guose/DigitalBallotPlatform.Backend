@@ -5,22 +5,22 @@ using DigitalBallotPlatform.Shared.Models;
 
 namespace DigitalBallotPlatform.Election.Commands
 {
-    public class CreateElectionSetupCommand : ICreateCommand<ElectionSetupDTO>
+    public class ElectionSetupUpdateCommand : IUpdateCommand<ElectionSetupDTO>
     {
         private readonly ElectionDbContextFactory electionDbContextFactory;
 
-        public CreateElectionSetupCommand(ElectionDbContextFactory electionDbContextFactory)
+        public ElectionSetupUpdateCommand(ElectionDbContextFactory electionDbContextFactory)
         {
             this.electionDbContextFactory = electionDbContextFactory;
         }
 
-        public async Task ExecuteCreateAsync(ElectionSetupDTO electionSetupDto)
+        public async Task ExecuteUpdateAsync(ElectionSetupDTO electionSetupDto)
         {
             using (var context = electionDbContextFactory.Create())
             {
-                ElectionSetupModel electionSetupModel = await ElectionSetupDTO.MapElectionSetupDTO(electionSetupDto);
+                ElectionSetupModel electionModel = await ElectionSetupDTO.MapElectionSetupModel(electionSetupDto);
 
-                await context.ElectionSetups.AddAsync(electionSetupModel);
+                context.ElectionSetups!.Update(electionModel);
                 await context.SaveChangesAsync();
             }
         }

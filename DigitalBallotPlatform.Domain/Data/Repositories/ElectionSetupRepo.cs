@@ -24,19 +24,19 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 if (electionSetup == null)
                     return false;
 
-                electionSetup = await ElectionSetupDTO.MapElectionSetupDTO(electionSetupDTO);
+                electionSetup = await ElectionSetupDTO.MapElectionSetupModel(electionSetupDTO);
 
                 Context.ElectionSetups.Update(electionSetup);
                 await SaveAsync();
 
-                logger.LogInformation("[INFO] Election ID {0} has been updated", electionSetup.Id);
+                logger.LogInformation("[INFO] {1} Message: Election ID {0} has been updated", electionSetup.Id, nameof(ExecuteUpdateAsync));
 
                 return true;
                 
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "[ERROR] Message: {0} InnerException: {1}", ex.Message, ex.InnerException!);
+                logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(ExecuteUpdateAsync));
                 throw new ArgumentException(ex.Message);
             }
         }
@@ -48,7 +48,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 ElectionSetupModel? electionSetup = await Context.ElectionSetups.FirstOrDefaultAsyncEF(e => e.Id == id);
 
                 if (electionSetup != null)
-                    return await ElectionSetupDTO.MapElectionSetupEntity(electionSetup);
+                    return await ElectionSetupDTO.MapElectionSetupDTO(electionSetup);
 
                 return null;
             }

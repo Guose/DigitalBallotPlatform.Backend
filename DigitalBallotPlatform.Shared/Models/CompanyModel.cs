@@ -18,8 +18,13 @@ namespace DigitalBallotPlatform.Shared.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
-
+        [Required]
+        [ForeignKey(nameof(AddressId))]
+        public int AddressId { get; set; }
         public AddressModel CompanyAddress { get; set; } = new();
+        [Required]
+        [ForeignKey(nameof(ContactId))]
+        public int ContactId { get; set; }
         public PlatformUserModel ContactPerson { get; set; } = new();
 
         public List<BallotMaterialModel> BallotMaterials { get; set; } = [];
