@@ -11,8 +11,9 @@ namespace DigitalBallotPlatform.Shared.Models
 
         [Required]
         public string Color { get; set; } = string.Empty;
+        [Required]
         public string Tint { get; set; } = string.Empty;
         public bool HasHeaderFill { get; set; } = false;
-        public List<PartyModel> Parties { get; set; } = new List<PartyModel>();
+        public List<PartyModel>? Parties { get; set; } = new List<PartyModel>();
     }
 }

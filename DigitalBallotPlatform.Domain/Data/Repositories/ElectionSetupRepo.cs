@@ -16,7 +16,10 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             {
                 ElectionSetupModel? electionSetup = await Context.ElectionSetups.FirstOrDefaultAsyncEF(e => e.Id == electionSetupDTO.Id);
                 if (electionSetup == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
                     return false;
+                }
 
                 electionSetup = await ElectionSetupDTO.MapElectionSetupModel(electionSetupDTO);
 
@@ -42,7 +45,10 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 ElectionSetupModel? electionSetup = await Context.ElectionSetups.FirstOrDefaultAsyncEF(e => e.Id == id);
 
                 if (electionSetup == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(GetElectionByIdAsync), this);
                     return null;
+                }
 
                 Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(ElectionSetupModel), nameof(GetElectionByIdAsync), id);
 

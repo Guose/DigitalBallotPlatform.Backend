@@ -16,7 +16,10 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             {
                 BallotMaterialModel? ballotMaterial = await Context.BallotMaterials.FirstOrDefaultAsyncEF(b => b.Id == ballotMaterialDTO.Id);
                 if (ballotMaterial == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
                     return false;
+                }
 
                 ballotMaterial = await BallotMaterialDTO.MapBallotMaterialModel(ballotMaterialDTO);
 
@@ -41,7 +44,10 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 BallotMaterialModel? ballotmaterial = await Context.BallotMaterials.FirstOrDefaultAsyncEF(b => b.Id == id);
 
                 if (ballotmaterial == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(GetBallotMaterialByIdAsync), this);
                     return null;
+                }
 
                 Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(BallotMaterialModel), nameof(GetBallotMaterialByIdAsync), id);
 
