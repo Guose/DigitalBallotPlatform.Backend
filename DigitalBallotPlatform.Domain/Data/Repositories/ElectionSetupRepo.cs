@@ -7,15 +7,9 @@ using LinqToDB.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
-    public class ElectionSetupRepo : GenericRepository<ElectionSetupDTO, ElectionDbContext>, IElectionSetupRepo
+    public class ElectionSetupRepo(ElectionDbContext context, ILogger logger) : 
+        GenericRepository<ElectionSetupDTO, ElectionDbContext>(context, logger), IElectionSetupRepo
     {
-        private readonly ILogger logger;
-
-        public ElectionSetupRepo(ElectionDbContext context, ILogger logger) : base(context, logger)
-        {
-            this.logger = logger;
-        }
-
         public async Task<bool> ExecuteUpdateAsync(ElectionSetupDTO electionSetupDTO)
         {
             try
@@ -36,7 +30,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(ExecuteUpdateAsync));
+                Logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(ExecuteUpdateAsync));
                 throw new ArgumentException(ex.Message);
             }
         }
@@ -57,7 +51,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "[ERROR] Message: {0} InnerException: {1}", ex.Message, ex.InnerException!);
+                Logger.LogError(ex, "[ERROR] Message: {0} InnerException: {1}", ex.Message, ex.InnerException!);
                 throw new ArgumentException(ex.Message);
             }
         }

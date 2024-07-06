@@ -3,7 +3,6 @@ using DigitalBallotPlatform.DataAccess.Context;
 using DigitalBallotPlatform.Domain.CompositeDTOs;
 using DigitalBallotPlatform.Domain.ServiceInterfaces;
 using DigitalBallotPlatform.Election.DTOs;
-using DigitalBallotPlatform.Election.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.ServiceHelpers

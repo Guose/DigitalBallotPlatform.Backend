@@ -7,15 +7,9 @@ using LinqToDB.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
-    public class PartyRepo : GenericRepository<PartyDTO, ElectionDbContext>, IPartyRepo
+    public class PartyRepo(ElectionDbContext context, ILogger logger) : 
+        GenericRepository<PartyDTO, ElectionDbContext>(context, logger), IPartyRepo
     {
-        private readonly ILogger logger;
-
-        public PartyRepo(ElectionDbContext context, ILogger logger) : base(context, logger)
-        {
-            this.logger = logger;
-        }
-
         public async Task<bool> ExecuteUpdateAsync(PartyDTO partyDto)
         {
             try
@@ -29,13 +23,13 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 Context.Parties.Update(party);
                 await SaveAsync();
 
-                Logger.LogInformation("[INFO] {1} Message: Entity {0} has been updated", nameof(ElectionSetupModel), nameof(ExecuteUpdateAsync));
+                Logger.LogInformation("[INFO] {1} Message: Entity {0} has been updated", nameof(PartyModel), nameof(ExecuteUpdateAsync));
 
                 return true;
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(ExecuteUpdateAsync));
+                Logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(ExecuteUpdateAsync));
                 throw new ArgumentException(ex.Message);
             }
         }
@@ -55,7 +49,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(ExecuteUpdateAsync));
+                Logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(GetPartyByIdAsync));
                 throw new ArgumentException(ex.Message);
             }
         }
