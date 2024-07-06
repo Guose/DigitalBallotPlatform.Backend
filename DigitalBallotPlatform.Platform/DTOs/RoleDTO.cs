@@ -1,4 +1,4 @@
-﻿namespace DigitalBallotPlatform.Shared.DTOs
+﻿namespace DigitalBallotPlatform.Platform.DTOs
 {
     public class RoleDTO
     {

@@ -6,11 +6,15 @@ namespace DigitalBallotPlatform.DataAccess.Context
     public class ElectionDbContext : DbContext
     {
         public ElectionDbContext(DbContextOptions options) : base(options) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
 
-        DbSet<CountyModel> Counties => Set<CountyModel>();
-        DbSet<BallotSpecModel> BallotSpecs => Set<BallotSpecModel>();
-        DbSet<PartyModel> Parties => Set<PartyModel>();
-        DbSet<WatermarkColorModel> WatermarkColors => Set<WatermarkColorModel>();
-        DbSet<WatermarkModel> Watermarks => Set<WatermarkModel>();
+        public DbSet<ElectionSetupModel> ElectionSetup => Set<ElectionSetupModel>();
+        public DbSet<CountyModel> Counties => Set<CountyModel>();
+        public DbSet<PartyModel> Parties => Set<PartyModel>();
+        public DbSet<WatermarkColorModel> WatermarkColors => Set<WatermarkColorModel>();
+        public DbSet<WatermarkModel> Watermarks => Set<WatermarkModel>();
     }
 }

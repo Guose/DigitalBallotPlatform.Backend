@@ -12,9 +12,10 @@ namespace DigitalBallotPlatform.Shared.Models
         [Required]
         public float Width { get; set; }
         [Required]
-        public int Sides { get; set; }
+        public int Pages { get; set; }
         public float StubSize { get; set; }
         public bool IsTopStub { get; set; }
+        public bool IsDuplex { get; set; } = true;
 
         [ForeignKey(nameof(MaterialId))]
         [Required]

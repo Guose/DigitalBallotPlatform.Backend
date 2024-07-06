@@ -15,4 +15,14 @@
     <None Remove="Company\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="linq2db.EntityFrameworkCore" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalBallotPlatform.Ballot\DigitalBallotPlatform.Ballot.csproj" />
+    <ProjectReference Include="..\DigitalBallotPlatform.DataAccess\DigitalBallotPlatform.DataAccess.csproj" />
+    <ProjectReference Include="..\DigitalBallotPlatform.Election\DigitalBallotPlatform.Election.csproj" />
+  </ItemGroup>
+
 </Project>

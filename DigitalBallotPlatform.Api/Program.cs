@@ -1,6 +1,8 @@
 using DigitalBallotPlatform.Shared.Logger;
 using Microsoft.AspNetCore.Server.IISIntegration;
 using Newtonsoft.Json.Serialization;
+using System.Net.WebSockets;
+using System.Text;
 using ILogger = DigitalBallotPlatform.Shared.Logger.ILogger;
 
 namespace DigitalBallotPlatform.Api
@@ -24,7 +26,6 @@ namespace DigitalBallotPlatform.Api
 
             // Add services to the container.
             builder.Services.AddSingleton<ILogger, Logger>();
-
 
             builder.Services.AddControllers()
                 .AddNewtonsoftJson(settings =>
@@ -50,16 +51,54 @@ namespace DigitalBallotPlatform.Api
                 app.UseSwaggerUI();
             }
 
+            app.UseWebSockets();
+
+            app.Use(async (context, next) =>
+            {
+                if (context.WebSockets.IsWebSocketRequest)
+                {
+                    var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                    await HandleWebSocket(context, webSocket);
+                }
+                else
+                {
+                    await next();
+                }
+            });
+
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static async Task HandleWebSocket(HttpContext context, WebSocket webSocket)
+        {
+            var buffer = new byte[1024 * 4];
+            WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+
+            while (!result.CloseStatus.HasValue)
+            {
+                var criteria = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                var filteredData = ApplyCriteria(criteria);
+
+                var serverMsg = Encoding.UTF8.GetBytes(filteredData);
+                await webSocket.SendAsync(new ArraySegment<byte>(serverMsg, 0, serverMsg.Length), result.MessageType, result.EndOfMessage, CancellationToken.None);
+
+                result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+            }
+
+            await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
+        }
+
+        private static string ApplyCriteria(string criteria)
+        {
+            return $"Needs to be implemented on how were going to pass in criteria: {criteria}";
         }
     }
 }
