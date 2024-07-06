@@ -1,4 +1,6 @@
-﻿namespace DigitalBallotPlatform.Ballot.DTOs
+﻿using DigitalBallotPlatform.Shared.Models;
+
+namespace DigitalBallotPlatform.Ballot.DTOs
 {
     public class BallotSpecDTO
     {
@@ -23,6 +25,36 @@
             IsTopStub = isTopStub;
             IsDuplex = isDuplex;
             BallotMaterialId = ballotMaterialId;
+        }
+
+        public static async Task<BallotSpecModel> MapBallotSpecModel(BallotSpecDTO model)
+        {
+            return await Task.Run(() => new BallotSpecModel
+            {
+                Id = model.Id,
+                Length = model.Length,
+                Width = model.Width,
+                Pages = model.Pages,
+                StubSize = model.StubSize,
+                IsTopStub = model.IsTopStub,
+                IsDuplex = model.IsDuplex,
+                MaterialId = model.BallotMaterialId
+            });
+        }
+
+        public static async Task<BallotSpecDTO> MapBallotSpecDto(BallotSpecModel model)
+        {
+            return await Task.Run(() => new BallotSpecDTO
+            {
+                Id = model.Id,
+                Length = model.Length,
+                Width = model.Width,
+                Pages = model.Pages,
+                StubSize = model.StubSize,
+                IsTopStub = model.IsTopStub,
+                IsDuplex = model.IsDuplex,
+                BallotMaterialId = model.MaterialId
+            });
         }
     }
 }
