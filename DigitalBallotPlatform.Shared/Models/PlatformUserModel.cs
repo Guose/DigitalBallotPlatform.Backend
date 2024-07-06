@@ -11,7 +11,9 @@ namespace DigitalBallotPlatform.Shared.Models
         public Guid Id { get; set; }
 
         [Required]
-        public string Name { get; set; } = string.Empty;
+        public string Firstname { get; set; } = string.Empty;
+        [Required]
+        public string Lastname { get; set; } = string.Empty;
 
         [Required]
         [EmailAddress]

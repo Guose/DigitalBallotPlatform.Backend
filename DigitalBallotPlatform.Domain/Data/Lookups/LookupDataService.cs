@@ -1,6 +1,5 @@
 ﻿using DigitalBallotPlatform.DataAccess.Context;
 using DigitalBallotPlatform.Shared.Models;
-using LinqToDB.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Lookups
@@ -41,25 +40,46 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
             return await ctx.BallotMaterials.AsNoTracking()
                 .Select(b => new LookupItem
                 {
-                    Id= b.Id,
-                    DisplayMember = b.IsTextWeight == true ? $"{b.Weight}# Text" : $"{b.Weight}# Index",
+                    Id = b.Id,
+                    DisplayMember = b.IsTextWeight == true ? $"{b.Company.Name} {b.Weight}# Text" : $"{b.Company.Name} {b.Weight}# Index",
                 })
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<LookupItem>> GetBallotSpecsLookupAsync()
+        public async Task<IEnumerable<LookupItem>> GetBallotSpecsLookupAsync()
         {
-            throw new NotImplementedException();
+            using var ctx = ballotContextCreator();
+            return await ctx.BallotSpecs.AsNoTracking()
+                .Select(b => new LookupItem()
+                {
+                    Id = b.Id,
+                    DisplayMember = "Ballot Specs"
+                })
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<LookupItem>> GetCompanyLookupAsync()
+        public async Task<IEnumerable<LookupItem>> GetCompanyLookupAsync()
         {
-            throw new NotImplementedException();
+            using var ctx = platformContextCreator();
+            return await ctx.Companies.AsNoTracking()
+                .Select(c => new LookupItem
+                {
+                    Id = c.Id,
+                    DisplayMember = c.Name
+                })
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<LookupItem>> GetCountyLookupAsync()
+        public async Task<IEnumerable<LookupItem>> GetCountyLookupAsync()
         {
-            throw new NotImplementedException();
+            using var ctx = electionContextCreator();
+            return await ctx.Counties.AsNoTracking()
+                .Select(c => new LookupItem
+                {
+                    Id = c.Id,
+                    DisplayMember = c.Name
+                })
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<LookupItem>> GetElectionLookupAsync()
@@ -88,24 +108,52 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<LookupItem>> GetPlatformUserLookupAsync()
+        public async Task<IEnumerable<LookupItem>> GetPlatformUserLookupAsync()
         {
-            throw new NotImplementedException();
+            using var ctx = platformContextCreator();
+            return await ctx.PlatformUsers.AsNoTracking()
+                .Select(u => new LookupItem
+                {
+                    UserId = u.Id,
+                    DisplayMember = $"{u.Firstname} {u.Lastname}"
+                })
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<LookupItem>> GetRoleLookupAsync()
+        public async Task<IEnumerable<LookupItem>> GetRoleLookupAsync()
         {
-            throw new NotImplementedException();
+            using var ctx = platformContextCreator();
+            return await ctx.Roles.AsNoTracking()
+                .Select(r => new LookupItem
+                {
+                    Id = r.Id,
+                    DisplayMember = r.Role
+                })
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<LookupItem>> GetWatermarkColorLookupAsync()
+        public async Task<IEnumerable<LookupItem>> GetWatermarkColorLookupAsync()
         {
-            throw new NotImplementedException();
+            using var ctx = electionContextCreator();
+            return await ctx.WatermarkColors.AsNoTracking()
+                .Select(wc => new LookupItem
+                {
+                    Id = wc.Id,
+                    DisplayMember = $"{wc.Tint}{wc.Color}"
+                })
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<LookupItem>> GetWatermarkLookupAsync()
+        public async Task<IEnumerable<LookupItem>> GetWatermarkLookupAsync()
         {
-            throw new NotImplementedException();
+            using var ctx = electionContextCreator();
+            return await ctx.Watermarks.AsNoTracking()
+                .Select(w => new LookupItem
+                {
+                    Id = w.Id,
+                    DisplayMember = w.Name
+                })
+                .ToListAsync();
         }
     }
 }
