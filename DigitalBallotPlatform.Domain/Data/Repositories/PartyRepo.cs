@@ -1,6 +1,6 @@
 ﻿using DigitalBallotPlatform.DataAccess.Context;
 using DigitalBallotPlatform.Domain.Data.Interfaces;
-using DigitalBallotPlatform.Election.Models;
+using DigitalBallotPlatform.Election.DTOs;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
@@ -11,7 +11,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
     {
         private readonly ILogger logger;
 
-        public PartyRepo(ElectionDbContext context, ILogger logger) : base(context)
+        public PartyRepo(ElectionDbContext context, ILogger logger) : base(context, logger)
         {
             this.logger = logger;
         }
@@ -29,7 +29,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 Context.Parties.Update(party);
                 await SaveAsync();
 
-                logger.LogInformation("[INFO] {1} Message: Election ID {0} has been updated", party.Id, nameof(ExecuteUpdateAsync));
+                Logger.LogInformation("[INFO] {1} Message: Entity {0} has been updated", nameof(ElectionSetupModel), nameof(ExecuteUpdateAsync));
 
                 return true;
             }
@@ -40,16 +40,18 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             }
         }
 
-        public async Task<PartyDTO?> GetElectionByIdAsync(int id)
+        public async Task<PartyDTO?> GetPartyByIdAsync(int id)
         {
             try
             {
                 PartyModel? party = await Context.Parties.FirstOrDefaultAsyncEF(p => p.Id == id);
 
-                if (party != null)
-                    return await PartyDTO.MapPartyDTO(party);
+                if (party == null)
+                    return null;
 
-                return null;
+                Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(PartyModel), nameof(GetPartyByIdAsync), id);
+
+                return await PartyDTO.MapPartyDTO(party);
             }
             catch (Exception ex)
             {

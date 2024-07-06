@@ -11,7 +11,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
     {
         private readonly ILogger logger;
 
-        public ElectionSetupRepo(ElectionDbContext context, ILogger logger) : base(context)
+        public ElectionSetupRepo(ElectionDbContext context, ILogger logger) : base(context, logger)
         {
             this.logger = logger;
         }
@@ -29,7 +29,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 Context.ElectionSetups.Update(electionSetup);
                 await SaveAsync();
 
-                logger.LogInformation("[INFO] {1} Message: Election ID {0} has been updated", electionSetup.Id, nameof(ExecuteUpdateAsync));
+                Logger.LogInformation("[INFO] {1} Message: Entity {0} has been updated", nameof(ElectionSetupModel), nameof(ExecuteUpdateAsync));
 
                 return true;
                 
@@ -47,10 +47,13 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             {
                 ElectionSetupModel? electionSetup = await Context.ElectionSetups.FirstOrDefaultAsyncEF(e => e.Id == id);
 
-                if (electionSetup != null)
-                    return await ElectionSetupDTO.MapElectionSetupDTO(electionSetup);
+                if (electionSetup == null)
+                    return null;
 
-                return null;
+                Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(ElectionSetupModel), nameof(GetElectionByIdAsync), id);
+
+
+                return await ElectionSetupDTO.MapElectionSetupDTO(electionSetup);
             }
             catch (Exception ex)
             {

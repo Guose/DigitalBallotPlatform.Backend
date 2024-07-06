@@ -1,6 +1,6 @@
 ﻿using DigitalBallotPlatform.Shared.Models;
 
-namespace DigitalBallotPlatform.Election.Models
+namespace DigitalBallotPlatform.Election.DTOs
 {
     public class PartyDTO
     {
@@ -16,28 +16,6 @@ namespace DigitalBallotPlatform.Election.Models
             Name = name;
             Acronym = acronym;
             ElectionId = electionId;
-        }
-
-        public static implicit operator PartyDTO(PartyModel partyModel)
-        {
-            return new PartyDTO
-            {
-               Id = partyModel.Id,
-               Name = partyModel.Name,
-               Acronym = partyModel.Acronym,
-               ElectionId = partyModel.ElectionId,
-            };
-        }
-
-        public static implicit operator PartyModel(PartyDTO partyDto)
-        {
-            return new PartyModel
-            {
-                Id = partyDto.Id,
-                Name = partyDto.Name,
-                Acronym = partyDto.Acronym,
-                ElectionId = partyDto.ElectionId,
-            };
         }
 
         public static async Task<PartyDTO> MapPartyDTO(PartyModel partyModel)

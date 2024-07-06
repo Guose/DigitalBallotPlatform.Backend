@@ -30,18 +30,9 @@ namespace DigitalBallotPlatform.Api.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             };
 
-            Logger.LogInformation("User {UserId} is creating a new car with model {Model}", User.Identity?.Name);
-
+            Logger.LogInformation("User {UserId} is creating a new car with model {Model}", User.Identity?.Name!);
 
             return (IEnumerable<WeatherForecast>)forecast;
-
-            //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            //{
-            //    Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            //    TemperatureC = Random.Shared.Next(-20, 55),
-            //    Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            //})
-            //.ToArray();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using DigitalBallotPlatform.DataAccess.Factory;
-using DigitalBallotPlatform.Election.Models;
+using DigitalBallotPlatform.Election.DTOs;
 using DigitalBallotPlatform.Shared.Interfaces.Commands;
 using DigitalBallotPlatform.Shared.Models;
 
@@ -18,7 +18,7 @@ namespace DigitalBallotPlatform.Election.Commands
         {
             using (var context = electionDbContextFactory.Create())
             {
-                PartyModel party = await PartyDTO.MapPartyDTO(partyDto);
+                PartyModel party = await PartyDTO.MapPartyModel(partyDto);
 
                 await context.Parties.AddAsync(party);
                 await context.SaveChangesAsync();

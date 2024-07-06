@@ -57,7 +57,6 @@ namespace DigitalBallotPlatform.Domain.ServiceHelpers
                         Id = p.Id,
                         Name = p.Name,
                         Acronym = p.Acronym,
-                        Abbreviations = p.Abbreviations,
                     })
                     .ToList()
                 },

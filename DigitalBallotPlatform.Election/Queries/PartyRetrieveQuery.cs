@@ -1,5 +1,5 @@
 ﻿using DigitalBallotPlatform.DataAccess.Factory;
-using DigitalBallotPlatform.Election.Models;
+using DigitalBallotPlatform.Election.DTOs;
 using DigitalBallotPlatform.Shared.Interfaces.Queries;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB;

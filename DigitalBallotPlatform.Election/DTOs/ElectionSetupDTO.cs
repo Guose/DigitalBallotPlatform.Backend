@@ -1,5 +1,4 @@
-﻿using DigitalBallotPlatform.Election.Models;
-using DigitalBallotPlatform.Shared.Models;
+﻿using DigitalBallotPlatform.Shared.Models;
 using System.Globalization;
 
 namespace DigitalBallotPlatform.Election.DTOs
