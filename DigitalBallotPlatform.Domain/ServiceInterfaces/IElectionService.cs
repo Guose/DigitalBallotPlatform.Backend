@@ -1,6 +1,6 @@
 ﻿using DigitalBallotPlatform.Domain.CompositeDTOs;
 
-namespace DigitalBallotPlatform.Domain.Interfaces
+namespace DigitalBallotPlatform.Domain.ServiceInterfaces
 {
     public interface IElectionService
     {

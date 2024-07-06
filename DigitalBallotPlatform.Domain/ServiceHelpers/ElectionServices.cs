@@ -1,9 +1,8 @@
 ﻿using DigitalBallotPlatform.Ballot.DTOs;
 using DigitalBallotPlatform.DataAccess.Context;
 using DigitalBallotPlatform.Domain.CompositeDTOs;
-using DigitalBallotPlatform.Domain.Interfaces;
+using DigitalBallotPlatform.Domain.ServiceInterfaces;
 using DigitalBallotPlatform.Election.DTOs;
-using DigitalBallotPlatform.Election.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.ServiceHelpers
@@ -21,7 +20,7 @@ namespace DigitalBallotPlatform.Domain.ServiceHelpers
 
         public async Task<ElectionWithBallotComposite> GetElectionWithBallotSpecAsync(int electionId)
         {
-            var election = await electionDbContext.ElectionSetup
+            var election = await electionDbContext.ElectionSetups
                 .Include(e => e.Watermark)
                 .Include(e => e.County)
                 .Include(e => e.Parties)
@@ -57,7 +56,6 @@ namespace DigitalBallotPlatform.Domain.ServiceHelpers
                         Id = p.Id,
                         Name = p.Name,
                         Acronym = p.Acronym,
-                        Abbreviations = p.Abbreviations,
                     })
                     .ToList()
                 },

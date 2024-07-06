@@ -1,6 +1,6 @@
 ﻿namespace DigitalBallotPlatform.Shared.Interfaces.Commands
 {
-    public interface IDeleteCommand<T>
+    public interface IDeleteCommand
     {
         Task<bool> ExecuteDeleteAsync(int id);
     }

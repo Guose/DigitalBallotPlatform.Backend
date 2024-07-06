@@ -2,6 +2,6 @@
 {
     public interface ICreateCommand<T>
     {
-        Task<T> ExecuteCreateAsync(T obj);
+        Task ExecuteCreateAsync(T obj);
     }
 }

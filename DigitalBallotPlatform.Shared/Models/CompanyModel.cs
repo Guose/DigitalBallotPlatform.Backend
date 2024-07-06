@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DigitalBallotPlatform.Shared.Models
 {
     public class CompanyModel
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
@@ -16,8 +18,13 @@ namespace DigitalBallotPlatform.Shared.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
-
+        [Required]
+        [ForeignKey(nameof(AddressId))]
+        public int AddressId { get; set; }
         public AddressModel CompanyAddress { get; set; } = new();
+        [Required]
+        [ForeignKey(nameof(ContactId))]
+        public int ContactId { get; set; }
         public PlatformUserModel ContactPerson { get; set; } = new();
 
         public List<BallotMaterialModel> BallotMaterials { get; set; } = [];

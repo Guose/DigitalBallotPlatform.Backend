@@ -9,7 +9,7 @@ namespace DigitalBallotPlatform.Shared.Logger
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
-                .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Month)
                 .CreateLogger();
         }
     }

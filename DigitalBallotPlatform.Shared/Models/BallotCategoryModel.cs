@@ -7,6 +7,7 @@ namespace DigitalBallotPlatform.Shared.Models
     public class BallotCategoryModel
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public BallotCategoryType Category { get; set; } 
