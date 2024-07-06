@@ -16,7 +16,10 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             {
                 BallotCategoryModel? ballotCategory = await Context.BallotCategories.FirstOrDefaultAsyncEF(b => b.Id == ballotCategoryDto.Id);
                 if (ballotCategory == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
                     return false;
+                }
 
                 ballotCategory = await BallotCategoryDTO.MapBallotCategoryModel(ballotCategoryDto);
 
@@ -41,7 +44,10 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 BallotCategoryModel? ballotCategory = await Context.BallotCategories.FirstOrDefaultAsyncEF(b => b.Id == id);
 
                 if (ballotCategory == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(GetBallotCategoryByIdAsync), this);
                     return null;
+                }
 
                 Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(BallotCategoryModel), nameof(GetBallotCategoryByIdAsync), id);
 

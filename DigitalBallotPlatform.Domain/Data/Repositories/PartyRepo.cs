@@ -16,7 +16,10 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             {
                 PartyModel? party = await Context.Parties.FirstOrDefaultAsyncEF(p => p.Id == partyDto.Id);
                 if (party == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
                     return false;
+                }
 
                 party = await PartyDTO.MapPartyModel(partyDto);
 
@@ -41,7 +44,10 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 PartyModel? party = await Context.Parties.FirstOrDefaultAsyncEF(p => p.Id == id);
 
                 if (party == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(GetPartyByIdAsync), this);
                     return null;
+                }
 
                 Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(PartyModel), nameof(GetPartyByIdAsync), id);
 

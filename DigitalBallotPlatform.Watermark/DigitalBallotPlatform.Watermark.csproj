@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalBallotPlatform.Shared\DigitalBallotPlatform.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -16,7 +16,10 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             {
                 BallotSpecModel? ballotSpec = await Context.BallotSpecs.FirstOrDefaultAsyncEF(b => b.Id == ballotSpecDTO.Id);
                 if (ballotSpec == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
                     return false;
+                }
 
                 ballotSpec = await BallotSpecDTO.MapBallotSpecModel(ballotSpecDTO);
 
@@ -41,7 +44,10 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 BallotSpecModel? ballotSpec = await Context.BallotSpecs.FirstOrDefaultAsyncEF(b => b.Id == id);
 
                 if (ballotSpec == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(GetBallotSpecByIdAsync), this);
                     return null;
+                }
 
                 Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(BallotSpecModel), nameof(GetBallotSpecByIdAsync), id);
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DigitalBallotPlatform.Shared.Types;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DigitalBallotPlatform.Shared.Models
@@ -10,7 +11,7 @@ namespace DigitalBallotPlatform.Shared.Models
         public int Id { get; set; }
 
         [Required]
-        public string Role { get; set; } = string.Empty;
+        public RoleTypes Role { get; set; }
         public string? Description { get; set; }
 
         [Required]

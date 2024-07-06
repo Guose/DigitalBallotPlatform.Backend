@@ -115,7 +115,7 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
                 .Select(u => new LookupItem
                 {
                     UserId = u.Id,
-                    DisplayMember = $"{u.Firstname} {u.Lastname}"
+                    DisplayMember = u.Fullname,
                 })
                 .ToListAsync();
         }
@@ -127,7 +127,7 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
                 .Select(r => new LookupItem
                 {
                     Id = r.Id,
-                    DisplayMember = r.Role
+                    DisplayMember = r.Role.ToString()
                 })
                 .ToListAsync();
         }

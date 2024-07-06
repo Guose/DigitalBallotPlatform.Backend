@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigitalBallotPlatform.Ballot\DigitalBallotPlatform.Ballot.csproj" />
+    <ProjectReference Include="..\DigitalBallotPlatform.Company\DigitalBallotPlatform.Company.csproj" />
     <ProjectReference Include="..\DigitalBallotPlatform.County\DigitalBallotPlatform.County.csproj" />
     <ProjectReference Include="..\DigitalBallotPlatform.DataAccess\DigitalBallotPlatform.DataAccess.csproj" />
     <ProjectReference Include="..\DigitalBallotPlatform.Election\DigitalBallotPlatform.Election.csproj" />
