@@ -11,24 +11,15 @@ namespace DigitalBallotPlatform.Shared.Models
 
         [Required]
         public string Name { get; set; } = string.Empty;
+        public string? ContactPerson { get; set; }
         public string? Description { get; set; }
-        public string? Fax { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(AddressId))]
-        public int AddressId { get; set; }
-        public AddressModel CompanyAddress { get; set; } = new();
-        [Required]
-        [ForeignKey(nameof(ContactId))]
-        public int ContactId { get; set; }
-        public PlatformUserModel ContactPerson { get; set; } = new();
-
-        public List<BallotMaterialModel> BallotMaterials { get; set; } = [];
-        public List<PlatformUserModel> PlatformUsers { get; set; } = [];
-        public List<RoleModel> Roles { get; set; } = [];
+        public AddressModel Address { get; set; } = new();
+        public ICollection<BallotMaterialModel> BallotMaterials { get; set; } = [];
+        public ICollection<PlatformUserModel> PlatformUsers { get; set; } = [];
+        public ICollection<RoleModel> Roles { get; set; } = [];
     }
 }

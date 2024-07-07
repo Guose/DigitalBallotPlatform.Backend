@@ -16,7 +16,13 @@ namespace DigitalBallotPlatform.Shared.Models
         public string Acronym { get; set; } = string.Empty;
         public string? Abbreviations { get; set; }
 
+        [Required]
+        [ForeignKey(nameof(ElectionId))]
         public int? ElectionId { get; set; }
         public ElectionSetupModel? Election { get; set; }
+        [Required]
+        [ForeignKey(nameof(WatermarkColorId))]
+        public int? WatermarkColorId { get; set; }
+        public WatermarkColorModel? WatermarkColor { get; set; }
     }
 }

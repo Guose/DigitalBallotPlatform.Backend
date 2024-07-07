@@ -23,7 +23,7 @@ namespace DigitalBallotPlatform.Shared.Models
         public int MaterialId { get; set; }
         public BallotMaterialModel? BallotMaterial { get; set; }
 
-        public List<BallotCategoryModel> BallotCategories { get; set; } = new List<BallotCategoryModel>();
-        public List<ElectionSetupModel> Elections { get; set; } = new List<ElectionSetupModel>();
+        public ICollection<BallotCategoryModel> BallotCategories { get; set; } = [];
+        public ICollection<ElectionSetupModel> Elections { get; set; } = [];
     }
 }

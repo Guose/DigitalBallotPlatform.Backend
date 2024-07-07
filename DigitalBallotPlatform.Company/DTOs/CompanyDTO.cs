@@ -6,22 +6,17 @@ namespace DigitalBallotPlatform.Company.DTOs
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string? ContactPerson { get; set; }
         public string? Description { get; set; }
-        public string? Fax { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public int AddressId { get; set; }
-        public int ContactId { get; set; }
+        public AddressModel Address { get; set; } = new();
 
         public CompanyDTO() { }
-        public CompanyDTO(int id, string name, string description, string fax, DateTime updatedAt, int addressId, int contactId)
+        public CompanyDTO(int id, string name, string description, string? contactPerson)
         {
             Id = id;
             Name = name;
             Description = description;
-            Fax = fax;
-            UpdatedAt = updatedAt;
-            AddressId = addressId;
-            ContactId = contactId;
+            ContactPerson = contactPerson;
         }
 
         public static async Task<CompanyDTO> MapCompanyDto(CompanyModel company)
@@ -31,10 +26,7 @@ namespace DigitalBallotPlatform.Company.DTOs
                 Id = company.Id,
                 Name = company.Name,
                 Description = company.Description,
-                Fax = company.Fax,
-                UpdatedAt = company.UpdatedAt,
-                AddressId = company.AddressId,
-                ContactId = company.ContactId,
+                Address = company.Address,
             });
         }
 
@@ -45,10 +37,7 @@ namespace DigitalBallotPlatform.Company.DTOs
                 Id = companyDto.Id,
                 Name = companyDto.Name,
                 Description = companyDto.Description,
-                Fax = companyDto.Fax,
-                UpdatedAt = companyDto.UpdatedAt,
-                AddressId = companyDto.AddressId,
-                ContactId = companyDto.ContactId,
+                Address = companyDto.Address
             });
         }
     }

@@ -23,6 +23,6 @@ namespace DigitalBallotPlatform.Shared.Models
         [ForeignKey(nameof(CompanyId))]
         public int CompanyId { get; set; }
         public CompanyModel Company { get; set; } = new CompanyModel();
-        public List<PlatformUserModel> PlatformUsers { get; set; } = new List<PlatformUserModel>();
+        public ICollection<PlatformUserModel> PlatformUsers { get; set; } = [];
     }
 }

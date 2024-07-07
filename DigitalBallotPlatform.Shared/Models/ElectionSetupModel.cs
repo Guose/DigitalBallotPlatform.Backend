@@ -30,7 +30,7 @@ namespace DigitalBallotPlatform.Shared.Models
         public int BallotSpecsId { get; set; }
         public BallotSpecModel BallotSpec { get; set; } = new BallotSpecModel();
 
-        public List<PartyModel> Parties { get; set; } = new List<PartyModel>();
+        public ICollection<PartyModel> Parties { get; set; } = new List<PartyModel>();
 
 
         private string? _formattedDate;
