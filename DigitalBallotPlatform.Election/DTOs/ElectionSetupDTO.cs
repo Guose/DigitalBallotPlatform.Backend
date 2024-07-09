@@ -10,7 +10,7 @@ namespace DigitalBallotPlatform.Election.DTOs
         public int Id { get; set; }
         public DateTime ElectionDate { get; set; }
         public string? Description { get; set; }
-        public int WatermarkId { get; set; }
+        public int? WatermarkId { get; set; }
         public int CountyId { get; set; }
         public int BallotSpecsId { get; set; }
         public List<PartyDTO>? Parties { get; set; }
@@ -33,7 +33,7 @@ namespace DigitalBallotPlatform.Election.DTOs
         }
 
         public ElectionSetupDTO() { }
-        public ElectionSetupDTO(int id, DateTime electionDate, string description, int watermarkId, int countyId, int ballotSpecsId)
+        public ElectionSetupDTO(int id, DateTime electionDate, string description, int? watermarkId, int countyId, int ballotSpecsId)
         {
             Id = id;
             ElectionDate = electionDate;

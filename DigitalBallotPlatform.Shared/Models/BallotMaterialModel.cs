@@ -14,6 +14,6 @@ namespace DigitalBallotPlatform.Shared.Models
 
         [Required][ForeignKey(nameof(CompanyId))]
         public int CompanyId { get; set; }
-        public CompanyModel Company { get; set; } = new();
+        public CompanyModel? Company { get; set; }
     }
 }

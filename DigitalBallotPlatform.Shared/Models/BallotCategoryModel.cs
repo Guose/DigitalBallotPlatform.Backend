@@ -21,6 +21,6 @@ namespace DigitalBallotPlatform.Shared.Models
         [ForeignKey("BallotSpecId")]
         [Required]
         public int BallotSpecId { get; set; }
-        public BallotSpecModel BallotSpec { get; set; } = new BallotSpecModel();
+        public BallotSpecModel? BallotSpec { get; set; }
     }
 }

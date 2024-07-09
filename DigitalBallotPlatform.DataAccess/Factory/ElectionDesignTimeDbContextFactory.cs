@@ -1,6 +1,7 @@
 ﻿using DigitalBallotPlatform.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace DigitalBallotPlatform.DataAccess.Factory
 {
@@ -8,8 +9,18 @@ namespace DigitalBallotPlatform.DataAccess.Factory
     {
         public ElectionDbContext CreateDbContext(string[]? args = null)
         {
-            return new ElectionDbContext(
-                new DbContextOptionsBuilder().UseSqlite("Data Source=ElectionSetups.db").Options);
+            // Build configuration
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("SQLElectionDbConnection");
+
+            return new ElectionDbContext(new DbContextOptionsBuilder()
+                .UseSqlServer(connectionString)
+                .EnableSensitiveDataLogging()
+                .Options);
         }
     }
 }

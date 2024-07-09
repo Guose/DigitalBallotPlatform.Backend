@@ -22,9 +22,10 @@ namespace DigitalBallotPlatform.Shared.Models
         [Required]
         [ForeignKey(nameof(AddressId))]
         public int AddressId { get; set; }
-        public AddressModel CompanyAddress { get; set; } = new();
+        public AddressModel? Address { get; set; }
 
-        public List<PlatformUserModel> PlatformUsers { get; set; } = [];
-        public List<ElectionSetupModel> ElectionSetups { get; set; } = [];
+        public ICollection<PlatformUserModel> PlatformUsers { get; set; } = [];
+        public ICollection<ElectionSetupModel> ElectionSetups { get; set; } = [];
+        public ICollection<RoleModel> Roles { get; set; } = [];
     }
 }
