@@ -19,9 +19,13 @@ namespace DigitalBallotPlatform.Shared.Models
         [Required]
         public VoterSystemType VoterReg { get; set; }
 
-        
-        public AddressModel CompanyAddress { get; set; } = new();
+        [Required]
+        [ForeignKey(nameof(AddressId))]
+        public int AddressId { get; set; }
+        public AddressModel? Address { get; set; }
+
         public ICollection<PlatformUserModel> PlatformUsers { get; set; } = [];
         public ICollection<ElectionSetupModel> ElectionSetups { get; set; } = [];
+        public ICollection<RoleModel> Roles { get; set; } = [];
     }
 }

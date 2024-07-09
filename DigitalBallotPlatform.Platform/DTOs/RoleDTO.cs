@@ -10,7 +10,7 @@ namespace DigitalBallotPlatform.Platform.DTOs
         public string? Description { get; set; }
         public DateTime UpdatedAt { get; set; }
         public bool Enabled { get; set; }
-        public int CompanyId { get; set; }
+        public int? CompanyId { get; set; }
 
         public RoleDTO() { }
         public RoleDTO(int id, RoleTypes role, string description,DateTime updatedAt, bool enabled, int companyId)
@@ -30,9 +30,7 @@ namespace DigitalBallotPlatform.Platform.DTOs
                 Id = roleDTO.Id,
                 Role = roleDTO.Role,
                 Description = roleDTO.Description,
-                UpdatedAt = DateTime.Now,
                 Enabled = roleDTO.Enabled,
-                CompanyId = roleDTO.CompanyId
             });
         }
 
@@ -45,7 +43,6 @@ namespace DigitalBallotPlatform.Platform.DTOs
                 Description = role.Description,
                 UpdatedAt = DateTime.Now,
                 Enabled = role.Enabled,
-                CompanyId = role.CompanyId
             });
         }
     }

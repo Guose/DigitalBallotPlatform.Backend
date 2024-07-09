@@ -7,7 +7,6 @@ namespace DigitalBallotPlatform.Shared.Models
     public class PlatformUserModel
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Required]
@@ -26,7 +25,7 @@ namespace DigitalBallotPlatform.Shared.Models
 
         [Required]
         [Phone]
-        public string PrimaryPhone { get; set; } = string.Empty;
+        public string? PrimaryPhone { get; set; }
         [Phone]
         public string? SecodaryPhone { get; set; }
 
@@ -35,18 +34,16 @@ namespace DigitalBallotPlatform.Shared.Models
         public DateTime? UpdatedAt { get; set; }
 
         [ForeignKey(nameof(CountyId))]
-        [Required]
-        public int CountyId { get; set; }
-        public CountyModel County { get; set; } = new CountyModel();
+        public int? CountyId { get; set; }
+        public CountyModel? County { get; set; }
 
         [ForeignKey(nameof(CompanyId))]
-        [Required]
-        public int CompanyId { get; set; }
-        public CompanyModel Company { get; set; } = new CompanyModel();
+        public int? CompanyId { get; set; }
+        public CompanyModel? Company { get; set; }
 
         [ForeignKey(nameof(RoleId))]
         [Required]
         public int RoleId { get; set; }
-        public RoleModel Role { get; set; } = new RoleModel();
+        public RoleModel? Role { get; set; }
     }
 }

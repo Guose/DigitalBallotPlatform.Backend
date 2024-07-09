@@ -10,11 +10,11 @@ namespace DigitalBallotPlatform.Platform.DTOs
         public string Email { get; set; } = string.Empty;
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string PrimaryPhone { get; set; } = string.Empty;
+        public string? PrimaryPhone { get; set; } = string.Empty;
         public string? SecodaryPhone { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public int CountyId { get; set; }
-        public int CompanyId { get; set; }
+        public int? CountyId { get; set; }
+        public int? CompanyId { get; set; }
         public int RoleId { get; set; }
 
         public PlatformUserDTO() { }

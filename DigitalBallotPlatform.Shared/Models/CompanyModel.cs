@@ -17,7 +17,11 @@ namespace DigitalBallotPlatform.Shared.Models
         [Required]
         public DateTime CreatedAt { get; set; }
 
-        public AddressModel Address { get; set; } = new();
+        [Required]
+        [ForeignKey(nameof(AddressId))]
+        public int AddressId { get; set; }
+        public AddressModel? Address { get; set; }
+
         public ICollection<BallotMaterialModel> BallotMaterials { get; set; } = [];
         public ICollection<PlatformUserModel> PlatformUsers { get; set; } = [];
         public ICollection<RoleModel> Roles { get; set; } = [];

@@ -7,8 +7,8 @@ using LinqToDB.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
-    public class RoleRepo(PlatformDbContext context, ILogger logger) : 
-        GenericRepository<RoleDTO, PlatformDbContext>(context, logger), IRoleRepo
+    public class RoleRepo(ElectionDbContext context, ILogger logger) : 
+        GenericRepository<RoleDTO, ElectionDbContext>(context, logger), IRoleRepo
     {
         public async Task<bool> ExecuteUpdateAsync(RoleDTO roleDto)
         {

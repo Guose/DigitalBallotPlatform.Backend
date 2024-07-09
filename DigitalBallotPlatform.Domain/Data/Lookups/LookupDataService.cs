@@ -8,23 +8,16 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
         IBallotMaterialLookupDataService, IBallotSpecsLookupDataService, ICompanyLookupDataService, ICountyLookupDataService,
         IPlatformUserLookupDataService, IRoleLookupDataService, IWatermarkColorLookupDataService, IWatermarkLookupDataService
     {
-        private readonly Func<BallotDbContext> ballotContextCreator;
         private readonly Func<ElectionDbContext> electionContextCreator;
-        private readonly Func<PlatformDbContext> platformContextCreator;
 
-        public LookupDataService(
-            Func<BallotDbContext> ballotContextCreator,
-            Func<ElectionDbContext> electionContextCreator,
-            Func<PlatformDbContext> platformContextCreator)
+        public LookupDataService(Func<ElectionDbContext> electionContextCreator)
         {
-            this.ballotContextCreator = ballotContextCreator;
             this.electionContextCreator = electionContextCreator;
-            this.platformContextCreator = platformContextCreator;
         }
 
         public async Task<IEnumerable<LookupItem>> GetBallotCategoryLookupAsync()
         {
-            using var ctx = ballotContextCreator();
+            using var ctx = electionContextCreator();
             return await ctx.BallotCategories.AsNoTracking()
                 .Select(b => new LookupItem
                 {
@@ -36,7 +29,7 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
 
         public async Task<IEnumerable<LookupItem>> GetBallotMaterialLookupAsync()
         {
-            using var ctx = ballotContextCreator();
+            using var ctx = electionContextCreator();
             return await ctx.BallotMaterials.AsNoTracking()
                 .Select(b => new LookupItem
                 {
@@ -48,7 +41,7 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
 
         public async Task<IEnumerable<LookupItem>> GetBallotSpecsLookupAsync()
         {
-            using var ctx = ballotContextCreator();
+            using var ctx = electionContextCreator();
             return await ctx.BallotSpecs.AsNoTracking()
                 .Select(b => new LookupItem()
                 {
@@ -60,7 +53,7 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
 
         public async Task<IEnumerable<LookupItem>> GetCompanyLookupAsync()
         {
-            using var ctx = platformContextCreator();
+            using var ctx = electionContextCreator();
             return await ctx.Companies.AsNoTracking()
                 .Select(c => new LookupItem
                 {
@@ -110,7 +103,7 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
 
         public async Task<IEnumerable<LookupItem>> GetPlatformUserLookupAsync()
         {
-            using var ctx = platformContextCreator();
+            using var ctx = electionContextCreator();
             return await ctx.PlatformUsers.AsNoTracking()
                 .Select(u => new LookupItem
                 {
@@ -122,7 +115,7 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
 
         public async Task<IEnumerable<LookupItem>> GetRoleLookupAsync()
         {
-            using var ctx = platformContextCreator();
+            using var ctx = electionContextCreator();
             return await ctx.Roles.AsNoTracking()
                 .Select(r => new LookupItem
                 {

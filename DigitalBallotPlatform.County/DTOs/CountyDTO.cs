@@ -8,13 +8,15 @@ namespace DigitalBallotPlatform.County.DTOs
         public int Id { get; set; }
         public BallotSystemType BallotTabulation { get; set; }
         public VoterSystemType VoterReg { get; set; }
+        public int AddressId { get; set; }
 
         public CountyDTO() { }
-        public CountyDTO(int id, BallotSystemType ballotTab, VoterSystemType voterSystem)
+        public CountyDTO(int id, BallotSystemType ballotTab, VoterSystemType voterSystem, int addressId)
         {
             Id = id;
             BallotTabulation = ballotTab;
             VoterReg = voterSystem;
+            AddressId = addressId;
         }
 
         public static async Task<CountyModel> MapCountyModel(CountyDTO countyDTO)
@@ -24,6 +26,7 @@ namespace DigitalBallotPlatform.County.DTOs
                 Id = countyDTO.Id,
                 BallotTabulation = countyDTO.BallotTabulation,
                 VoterReg = countyDTO.VoterReg,
+                AddressId = countyDTO.AddressId
             });
         }
 
@@ -34,6 +37,7 @@ namespace DigitalBallotPlatform.County.DTOs
                 Id = county.Id,
                 BallotTabulation = county.BallotTabulation,
                 VoterReg = county.VoterReg,
+                AddressId = county.AddressId
             });
         }
     }

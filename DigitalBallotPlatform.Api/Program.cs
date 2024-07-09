@@ -1,5 +1,7 @@
+using DigitalBallotPlatform.DataAccess.Context;
 using DigitalBallotPlatform.Shared.Logger;
 using Microsoft.AspNetCore.Server.IISIntegration;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using System.Net.WebSockets;
 using System.Text;
@@ -12,6 +14,12 @@ namespace DigitalBallotPlatform.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(builder.Environment.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
 
             builder.Services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
@@ -26,6 +34,14 @@ namespace DigitalBallotPlatform.Api
 
             // Add services to the container.
             builder.Services.AddSingleton<ILogger, Logger>();
+
+            // Add SQL Server connection strings
+            var electionDbConnStrSQL = configuration.GetConnectionString("SQLElectionDbConnection");
+
+            // Add PostgreSQL connection strings
+            var electionDbConnStrPG = configuration.GetConnectionString("PGElectionDbConnection");
+
+            builder.Services.AddDbContext<ElectionDbContext>(options => options.UseSqlServer(electionDbConnStrSQL));
 
             builder.Services.AddControllers()
                 .AddNewtonsoftJson(settings =>
@@ -98,7 +114,7 @@ namespace DigitalBallotPlatform.Api
 
         private static string ApplyCriteria(string criteria)
         {
-            return $"Needs to be implemented on how were going to pass in criteria: {criteria}";
+            return $"Needs to be implemented on how we're going to pass in criteria: {criteria}";
         }
     }
 }

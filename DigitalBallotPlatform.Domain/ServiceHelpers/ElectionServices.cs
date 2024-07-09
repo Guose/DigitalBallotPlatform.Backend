@@ -9,12 +9,10 @@ namespace DigitalBallotPlatform.Domain.ServiceHelpers
 {
     public class ElectionServices : IElectionService
     {
-        private readonly BallotDbContext ballotDbContext;
         private readonly ElectionDbContext electionDbContext;
 
-        public ElectionServices(BallotDbContext ballotDbContext, ElectionDbContext electionDbContext)
+        public ElectionServices(ElectionDbContext electionDbContext)
         {
-            this.ballotDbContext = ballotDbContext;
             this.electionDbContext = electionDbContext;
         }
 
@@ -31,7 +29,7 @@ namespace DigitalBallotPlatform.Domain.ServiceHelpers
                 throw new ArgumentNullException($"Election for Id: {electionId} couldn't be found.");
             }
 
-            var ballotSpec = await ballotDbContext.BallotSpecs
+            var ballotSpec = await electionDbContext.BallotSpecs
                 .Include(bs => bs.BallotCategories)
                 .Include(bs => bs.BallotMaterial)
                 .FirstOrDefaultAsync(bs => bs.Id == election.BallotSpecsId);
