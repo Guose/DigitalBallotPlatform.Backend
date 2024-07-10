@@ -11,9 +11,8 @@ namespace DigitalBallotPlatform.County.DTOs
         public int AddressId { get; set; }
 
         public CountyDTO() { }
-        public CountyDTO(int id, BallotSystemType ballotTab, VoterSystemType voterSystem, int addressId)
+        public CountyDTO(BallotSystemType ballotTab, VoterSystemType voterSystem, int addressId)
         {
-            Id = id;
             BallotTabulation = ballotTab;
             VoterReg = voterSystem;
             AddressId = addressId;
@@ -23,7 +22,6 @@ namespace DigitalBallotPlatform.County.DTOs
         {
             return await Task.Run(() => new CountyModel
             {
-                Id = countyDTO.Id,
                 BallotTabulation = countyDTO.BallotTabulation,
                 VoterReg = countyDTO.VoterReg,
                 AddressId = countyDTO.AddressId

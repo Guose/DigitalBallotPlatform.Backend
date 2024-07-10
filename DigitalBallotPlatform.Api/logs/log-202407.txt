@@ -24,3 +24,4 @@ System.InvalidOperationException: Cannot create a DbSet for 'BallotCategoryDTO' 
    at System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable`1.GetAsyncEnumerator()
    at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
    at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.GetAllAsync() in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 60
+2024-07-10 03:10:59.365 -07:00 [INF] [INFO] GetBallotMaterialByIdAsync Message: Entity BallotMaterialModel query for Id: 1 was successfull

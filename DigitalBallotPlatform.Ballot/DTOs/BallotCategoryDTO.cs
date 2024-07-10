@@ -7,7 +7,7 @@ namespace DigitalBallotPlatform.Ballot.DTOs
     {
         public int Id { get; set; }
         public BallotCategoryType Category { get; set; }
-        public SubCategoryType? SubCategory { get; set; }
+        public SubCategoryType SubCategory { get; set; } = default;
         public LATestDeckType? LARotation { get; set; }
         public string Description { get; set; } = string.Empty;
         public bool IsTestdeck { get; set; }
@@ -15,7 +15,7 @@ namespace DigitalBallotPlatform.Ballot.DTOs
         public int BallotSpecId { get; set; }
 
         public BallotCategoryDTO() { }
-        public BallotCategoryDTO(int id,
+        public BallotCategoryDTO(
             BallotCategoryType category,
             SubCategoryType subCategory,
             LATestDeckType laRotation,
@@ -24,7 +24,6 @@ namespace DigitalBallotPlatform.Ballot.DTOs
             bool enabled,
             int ballotSpecId)
         {
-            Id = id;
             Category = category;
             SubCategory = subCategory;
             LARotation = laRotation;
@@ -38,7 +37,6 @@ namespace DigitalBallotPlatform.Ballot.DTOs
         {
             return await Task.Run(() => new BallotCategoryModel
             {
-                Id = ballotCategoryDto.Id,
                 Category = ballotCategoryDto.Category,
                 SubCategory = ballotCategoryDto.SubCategory,
                 LARotation = ballotCategoryDto.LARotation,

@@ -18,7 +18,7 @@ namespace DigitalBallotPlatform.Platform.DTOs
         public int RoleId { get; set; }
 
         public PlatformUserDTO() { }
-        public PlatformUserDTO(Guid id, 
+        public PlatformUserDTO( 
             string firstName, 
             string lastName,
             string email, 
@@ -31,7 +31,6 @@ namespace DigitalBallotPlatform.Platform.DTOs
             int companyId,
             int roleId)
         {
-            Id = id; 
             Firstname = firstName;
             Lastname = lastName;
             Email = email;
@@ -49,7 +48,6 @@ namespace DigitalBallotPlatform.Platform.DTOs
         {
             return await Task.Run(() => new PlatformUserModel
             {
-                Id = userDto.Id,
                 Fullname = $"{userDto.Firstname} {userDto.Lastname}",
                 Email = userDto.Email,
                 Username = userDto.Username,

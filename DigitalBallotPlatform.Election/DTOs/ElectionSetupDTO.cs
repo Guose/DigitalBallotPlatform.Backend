@@ -53,7 +53,6 @@ namespace DigitalBallotPlatform.Election.DTOs
                 WatermarkId = electionSetup.WatermarkId,
                 CountyId = electionSetup.CountyId,
                 BallotSpecsId = electionSetup.BallotSpecsId,
-                // Parties = [.. electionSetup.Parties]
             });
         }
 
@@ -61,13 +60,11 @@ namespace DigitalBallotPlatform.Election.DTOs
         {
             return Task.Run(() => new ElectionSetupModel
             {
-                Id = electionSetupDTO.Id,
                 ElectionDate = electionSetupDTO.ElectionDate,
                 Description = electionSetupDTO.Description,
                 WatermarkId = electionSetupDTO.WatermarkId,
                 CountyId = electionSetupDTO.CountyId,
                 BallotSpecsId = electionSetupDTO.BallotSpecsId,
-                // Parties = [.. electionSetupDTO.Parties]
             });
         }
     }

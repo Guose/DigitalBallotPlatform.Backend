@@ -33,7 +33,6 @@ namespace DigitalBallotPlatform.Election.DTOs
         {
             return await Task.Run(() => new PartyModel
             {
-                Id = partyDto.Id,
                 Name = partyDto.Name,
                 Acronym = partyDto.Acronym,
                 ElectionId = partyDto.ElectionId,

@@ -11,9 +11,8 @@ namespace DigitalBallotPlatform.Company.DTOs
         public int AddressId { get; set; }
 
         public CompanyDTO() { }
-        public CompanyDTO(int id, string name, string description, string? contactPerson, int addressId)
+        public CompanyDTO(string name, string description, string? contactPerson, int addressId)
         {
-            Id = id;
             Name = name;
             Description = description;
             ContactPerson = contactPerson;
@@ -35,7 +34,6 @@ namespace DigitalBallotPlatform.Company.DTOs
         {
             return await Task.Run(() => new CompanyModel
             {
-                Id = companyDto.Id,
                 Name = companyDto.Name,
                 Description = companyDto.Description,
                 AddressId = companyDto.AddressId

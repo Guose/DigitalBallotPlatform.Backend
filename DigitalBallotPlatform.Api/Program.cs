@@ -40,12 +40,13 @@ namespace DigitalBallotPlatform.Api
             builder.Services.AddScoped<IBallotCategoryRepo, BallotCategoryRepo>();
             builder.Services.AddScoped<IBallotMaterialRepo, BallotMaterialRepo>();
             builder.Services.AddScoped<IBallotSpecRepo, BallotSpecRepo>();
+            builder.Services.AddScoped<IElectionSetupRepo, ElectionSetupRepo>();
 
             builder.Services.AddScoped<BallotController>();
+            builder.Services.AddScoped<ElectionSetupController>();
 
             // Add SQL Server connection strings
             var electionDbConnStrSQL = configuration.GetConnectionString("SQLElectionDbConnection");
-
             // Add PostgreSQL connection strings
             var electionDbConnStrPG = configuration.GetConnectionString("PGElectionDbConnection");
 

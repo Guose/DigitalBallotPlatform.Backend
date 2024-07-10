@@ -11,7 +11,7 @@ namespace DigitalBallotPlatform.Shared.Models
         public int Id { get; set; }
         [Required]
         public BallotCategoryType Category { get; set; } 
-        public SubCategoryType? SubCategory { get; set; }
+        public SubCategoryType SubCategory { get; set; }
         public LATestDeckType? LARotation { get; set; }
         [Required]
         public string Description { get; set; } = string.Empty;
