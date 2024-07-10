@@ -34,7 +34,9 @@ namespace DigitalBallotPlatform.Domain.Data.Lookups
                 .Select(b => new LookupItem
                 {
                     Id = b.Id,
-                    DisplayMember = b.IsTextWeight == true ? $"{b.Company.Name} {b.Weight}# Text" : $"{b.Company.Name} {b.Weight}# Index",
+                    DisplayMember = b.IsTextWeight == true ? 
+                        $"{b.Company!.Name} {b.Weight}# Text" : 
+                        $"{b.Company!.Name} {b.Weight}# Index",
                 })
                 .ToListAsync();
         }

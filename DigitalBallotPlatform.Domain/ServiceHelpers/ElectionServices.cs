@@ -49,7 +49,7 @@ namespace DigitalBallotPlatform.Domain.ServiceHelpers
                     WatermarkId = election.WatermarkId,
                     CountyId = election.CountyId,
                     BallotSpecsId = election.BallotSpecsId,
-                    Parties = election.Parties.Select(p => new PartyDTO
+                    Parties = election.Parties!.Select(p => new PartyDTO
                     {
                         Id = p.Id,
                         Name = p.Name,
