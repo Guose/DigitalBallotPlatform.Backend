@@ -23,13 +23,11 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 await Context.Set<TEntity>().AddAsync(model);
                 await SaveAsync();
 
-                Logger.LogInformation("[INFO] {1} Message: Entity {0} has been created", typeof(TEntity).Name, nameof(ExecuteCreateAsync));
-
                 return true;
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "[ERROR] {3}:{2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(ExecuteCreateAsync), typeof(TEntity).Name);
+                Logger.LogError(ex, "{0}:{1} Message: {2} InnerException: {3}", nameof(ExecuteCreateAsync), typeof(TEntity).Name, ex.Message, ex.InnerException!);
                 throw new ArgumentException(ex.Message);
             }
         }
@@ -46,13 +44,11 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 Context.Set<TEntity>().Remove(model);
                 await SaveAsync();
 
-                Logger.LogInformation("[INFO] {1} Message: Entity {0} has been deleted", typeof(TEntity).Name, nameof(ExecuteDeleteAsync));
-
                 return true;
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "[ERROR] {3}:{2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(ExecuteDeleteAsync), typeof(TEntity).Name);
+                Logger.LogError(ex, "{0}:{1} Message: {2} InnerException: {3}", nameof(ExecuteDeleteAsync), typeof(TEntity).Name, ex.Message, ex.InnerException!);
                 throw new ArgumentException(ex.Message);
             }
         }
@@ -61,15 +57,11 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                var entity = await Context.Set<TEntity>().ToListAsync();
-
-                Logger.LogInformation("[INFO] {1} Message: Entity {0} query for all records was successfull", typeof(TEntity).Name, nameof(GetAllAsync));
-
-                return entity;
+                return await Context.Set<TEntity>().ToListAsync();
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "[ERROR] {3}:{2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(GetAllAsync), typeof(TEntity).Name);
+                Logger.LogError(ex, "{0}:{1} Message: {2} InnerException: {3}", nameof(GetAllAsync), typeof(TEntity).Name, ex.Message, ex.InnerException!);
                 throw new ArgumentException(ex.Message);
             }
         }

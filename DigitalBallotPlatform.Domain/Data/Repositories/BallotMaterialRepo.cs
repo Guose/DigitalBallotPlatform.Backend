@@ -8,7 +8,7 @@ using LinqToDB.EntityFrameworkCore;
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
     public class BallotMaterialRepo(ElectionDbContext context, ILogger logger) : 
-        GenericRepository<BallotMaterialDTO, ElectionDbContext>(context, logger), IBallotMaterialRepo
+        GenericRepository<BallotMaterialModel, ElectionDbContext>(context, logger), IBallotMaterialRepo
     {
         public async Task<bool> ExecuteUpdateAsync(BallotMaterialDTO ballotMaterialDTO)
         {

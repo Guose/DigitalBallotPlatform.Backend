@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigitalBallotPlatform.DataAccess\DigitalBallotPlatform.DataAccess.csproj" />
+    <ProjectReference Include="..\DigitalBallotPlatform.Domain\DigitalBallotPlatform.Domain.csproj" />
     <ProjectReference Include="..\DigitalBallotPlatform.Shared\DigitalBallotPlatform.Shared.csproj" />
   </ItemGroup>
 

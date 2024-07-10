@@ -1,4 +1,7 @@
+using DigitalBallotPlatform.Api.Controllers;
 using DigitalBallotPlatform.DataAccess.Context;
+using DigitalBallotPlatform.Domain.Data.Interfaces;
+using DigitalBallotPlatform.Domain.Data.Repositories;
 using DigitalBallotPlatform.Shared.Logger;
 using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +37,11 @@ namespace DigitalBallotPlatform.Api
 
             // Add services to the container.
             builder.Services.AddSingleton<ILogger, Logger>();
+            builder.Services.AddScoped<IBallotCategoryRepo, BallotCategoryRepo>();
+            builder.Services.AddScoped<IBallotMaterialRepo, BallotMaterialRepo>();
+            builder.Services.AddScoped<IBallotSpecRepo, BallotSpecRepo>();
+
+            builder.Services.AddScoped<BallotController>();
 
             // Add SQL Server connection strings
             var electionDbConnStrSQL = configuration.GetConnectionString("SQLElectionDbConnection");
@@ -41,7 +49,9 @@ namespace DigitalBallotPlatform.Api
             // Add PostgreSQL connection strings
             var electionDbConnStrPG = configuration.GetConnectionString("PGElectionDbConnection");
 
-            builder.Services.AddDbContext<ElectionDbContext>(options => options.UseSqlServer(electionDbConnStrSQL));
+            builder.Services.AddDbContext<ElectionDbContext>(options => 
+            options.UseSqlServer(electionDbConnStrSQL)
+            .EnableSensitiveDataLogging());
 
             builder.Services.AddControllers()
                 .AddNewtonsoftJson(settings =>
@@ -67,20 +77,20 @@ namespace DigitalBallotPlatform.Api
                 app.UseSwaggerUI();
             }
 
-            app.UseWebSockets();
+            //app.UseWebSockets();
 
-            app.Use(async (context, next) =>
-            {
-                if (context.WebSockets.IsWebSocketRequest)
-                {
-                    var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                    await HandleWebSocket(context, webSocket);
-                }
-                else
-                {
-                    await next();
-                }
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    if (context.WebSockets.IsWebSocketRequest)
+            //    {
+            //        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+            //        await HandleWebSocket(context, webSocket);
+            //    }
+            //    else
+            //    {
+            //        await next();
+            //    }
+            //});
 
             app.UseHttpsRedirection();
 
