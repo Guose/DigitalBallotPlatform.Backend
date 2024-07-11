@@ -4,6 +4,7 @@ using DigitalBallotPlatform.Domain.Data.Interfaces;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
@@ -14,7 +15,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {                
-                CountyModel? county = await Context.Counties.FirstOrDefaultAsyncEF(c => c.Id == countyDto.Id);
+                CountyModel? county = await Context.Counties.AsNoTracking().FirstOrDefaultAsyncEF(c => c.Id == countyDto.Id);
                 if (county == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
@@ -41,7 +42,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                CountyModel? county = await Context.Counties.FirstOrDefaultAsyncEF(c => c.Id == id);
+                CountyModel? county = await Context.Counties.AsNoTracking().FirstOrDefaultAsyncEF(c => c.Id == id);
                 if (county == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(GetCountyByIdAsync), this);

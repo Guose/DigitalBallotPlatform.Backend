@@ -41,6 +41,7 @@ namespace DigitalBallotPlatform.Api
             builder.Services.AddScoped<IBallotMaterialRepo, BallotMaterialRepo>();
             builder.Services.AddScoped<IBallotSpecRepo, BallotSpecRepo>();
             builder.Services.AddScoped<IElectionSetupRepo, ElectionSetupRepo>();
+            builder.Services.AddScoped<IPartyRepo, PartyRepo>();
 
             builder.Services.AddScoped<BallotController>();
             builder.Services.AddScoped<ElectionSetupController>();

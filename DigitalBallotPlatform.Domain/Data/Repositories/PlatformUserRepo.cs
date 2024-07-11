@@ -4,6 +4,7 @@ using DigitalBallotPlatform.Platform.DTOs;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
@@ -14,7 +15,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                PlatformUserModel? user = await Context.PlatformUsers.FirstOrDefaultAsyncEF(u => u.Id == userDto.Id);
+                PlatformUserModel? user = await Context.PlatformUsers.AsNoTracking().FirstOrDefaultAsyncEF(u => u.Id == userDto.Id);
 
                 if (user == null)
                 {
@@ -42,7 +43,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                PlatformUserModel? user = await Context.PlatformUsers.FirstOrDefaultAsyncEF(u => u.Id == id);
+                PlatformUserModel? user = await Context.PlatformUsers.AsNoTracking().FirstOrDefaultAsyncEF(u => u.Id == id);
 
                 if (user == null)
                 {

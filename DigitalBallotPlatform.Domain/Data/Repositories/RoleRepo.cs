@@ -4,6 +4,7 @@ using DigitalBallotPlatform.Platform.DTOs;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
@@ -14,7 +15,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                RoleModel? role = await Context.Roles.FirstOrDefaultAsyncEF(r => r.Id == roleDto.Id);
+                RoleModel? role = await Context.Roles.AsNoTracking().FirstOrDefaultAsyncEF(r => r.Id == roleDto.Id);
                 if (role == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
@@ -41,7 +42,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                RoleModel? role = await Context.Roles.FirstOrDefaultAsyncEF(r => r.Id == id);
+                RoleModel? role = await Context.Roles.AsNoTracking().FirstOrDefaultAsyncEF(r => r.Id == id);
                 if (role == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(GetRoleByIdAsync), this);

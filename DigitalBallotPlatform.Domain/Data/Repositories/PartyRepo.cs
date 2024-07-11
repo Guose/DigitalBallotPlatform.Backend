@@ -4,17 +4,18 @@ using DigitalBallotPlatform.Election.DTOs;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
     public class PartyRepo(ElectionDbContext context, ILogger logger) : 
-        GenericRepository<PartyDTO, ElectionDbContext>(context, logger), IPartyRepo
+        GenericRepository<PartyModel, ElectionDbContext>(context, logger), IPartyRepo
     {
         public async Task<bool> ExecuteUpdateAsync(PartyDTO partyDto)
         {
             try
             {
-                PartyModel? party = await Context.Parties.FirstOrDefaultAsyncEF(p => p.Id == partyDto.Id);
+                PartyModel? party = await Context.Parties.AsNoTracking().FirstOrDefaultAsyncEF(p => p.Id == partyDto.Id);
                 if (party == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
@@ -41,7 +42,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                PartyModel? party = await Context.Parties.FirstOrDefaultAsyncEF(p => p.Id == id);
+                PartyModel? party = await Context.Parties.AsNoTracking().FirstOrDefaultAsyncEF(p => p.Id == id);
 
                 if (party == null)
                 {

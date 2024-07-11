@@ -25,3 +25,30 @@ System.InvalidOperationException: Cannot create a DbSet for 'BallotCategoryDTO' 
    at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
    at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.GetAllAsync() in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 60
 2024-07-10 03:10:59.365 -07:00 [INF] [INFO] GetBallotMaterialByIdAsync Message: Entity BallotMaterialModel query for Id: 1 was successfull
+2024-07-10 19:26:36.523 -07:00 [INF] [INFO] GetPartyByIdAsync Message: Entity PartyModel query for Id: 1 was successfull
+2024-07-10 19:26:36.709 -07:00 [ERR] ExecuteDeleteAsync:PartyModel Message: The property 'PartyModel.Id' has a temporary value while attempting to change the entity's state to 'Deleted'. Either set a permanent value explicitly, or ensure that the database is configured to generate values for this property. InnerException: null
+System.InvalidOperationException: The property 'PartyModel.Id' has a temporary value while attempting to change the entity's state to 'Deleted'. Either set a permanent value explicitly, or ensure that the database is configured to generate values for this property.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState oldState, EntityState newState, Boolean acceptChanges, Boolean modifyProperties)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState entityState, Boolean acceptChanges, Boolean modifyProperties, Nullable`1 forceStateWhenUnknownKey, Nullable`1 fallbackState)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.set_State(EntityState value)
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Remove(TEntity entity)
+   at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.ExecuteDeleteAsync(TEntity model) in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 44
+2024-07-10 19:33:39.090 -07:00 [INF] [INFO] GetPartyByIdAsync Message: Entity PartyModel query for Id: 1 was successfull
+2024-07-10 19:45:54.645 -07:00 [INF] [INFO] GetPartyByIdAsync Message: Entity PartyModel query for Id: 1 was successfull
+2024-07-10 19:45:59.068 -07:00 [ERR] ExecuteDeleteAsync:PartyModel Message: The instance of entity type 'PartyModel' cannot be tracked because another instance with the key value '{Id: 1}' is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. InnerException: null
+System.InvalidOperationException: The instance of entity type 'PartyModel' cannot be tracked because another instance with the key value '{Id: 1}' is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.IdentityMap`1.ThrowIdentityConflict(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.IdentityMap`1.Add(TKey key, InternalEntityEntry entry, Boolean updateDuplicate)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.IdentityMap`1.Add(TKey key, InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.IdentityMap`1.Add(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.StartTracking(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState oldState, EntityState newState, Boolean acceptChanges, Boolean modifyProperties)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState entityState, Boolean acceptChanges, Boolean modifyProperties, Nullable`1 forceStateWhenUnknownKey, Nullable`1 fallbackState)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.EntityGraphAttacher.PaintAction(EntityEntryGraphNode`1 node)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.EntityEntryGraphIterator.TraverseGraph[TState](EntityEntryGraphNode`1 node, Func`2 handleNode)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.EntityGraphAttacher.AttachGraph(InternalEntityEntry rootEntry, EntityState targetState, EntityState storeGeneratedWithKeySetTargetState, Boolean forceStateWhenUnknownKey)
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.SetEntityState(InternalEntityEntry entry, EntityState entityState)
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Remove(TEntity entity)
+   at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.ExecuteDeleteAsync(TEntity model) in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 44
+2024-07-10 19:55:53.164 -07:00 [INF] [INFO] GetPartyByIdAsync Message: Entity PartyModel query for Id: 1 was successfull
+2024-07-10 20:21:20.541 -07:00 [INF] [INFO] GetPartyByIdAsync Message: Entity PartyModel query for Id: 1 was successfull

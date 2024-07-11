@@ -4,6 +4,7 @@ using DigitalBallotPlatform.Domain.Data.Interfaces;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
@@ -14,7 +15,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                BallotCategoryModel? ballotCategory = await Context.BallotCategories.FirstOrDefaultAsyncEF(b => b.Id == ballotCategoryDto.Id);
+                BallotCategoryModel? ballotCategory = await Context.BallotCategories.AsNoTracking().FirstOrDefaultAsyncEF(b => b.Id == ballotCategoryDto.Id);
                 if (ballotCategory == null)
                 {
                     Logger.LogWarning("{0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
@@ -39,7 +40,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                BallotCategoryModel? ballotCategory = await Context.BallotCategories.FirstOrDefaultAsyncEF(b => b.Id == id);
+                BallotCategoryModel? ballotCategory = await Context.BallotCategories.AsNoTracking().FirstOrDefaultAsyncEF(b => b.Id == id);
 
                 if (ballotCategory == null)
                 {

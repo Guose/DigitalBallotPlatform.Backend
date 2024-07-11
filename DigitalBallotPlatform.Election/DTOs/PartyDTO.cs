@@ -8,14 +8,16 @@ namespace DigitalBallotPlatform.Election.DTOs
         public string Name { get; set; } = string.Empty;
         public string Acronym { get; set; } = string.Empty;
         public int? ElectionId { get; set; }
+        public int? WatermarkColorId { get; set; }
 
         public PartyDTO() { }
-        public PartyDTO(int id, string name, string acronym, int electionId)
+        public PartyDTO(int id, string name, string acronym, int electionId, int? watermarkColorId)
         {
             Id = id;
             Name = name;
             Acronym = acronym;
             ElectionId = electionId;
+            WatermarkColorId = watermarkColorId;
         }
 
         public static async Task<PartyDTO> MapPartyDTO(PartyModel partyModel)
@@ -26,6 +28,7 @@ namespace DigitalBallotPlatform.Election.DTOs
                 Name = partyModel.Name,
                 Acronym = partyModel.Acronym,
                 ElectionId = partyModel.ElectionId,
+                WatermarkColorId = partyModel.WatermarkColorId,
             });
         }
 
@@ -33,9 +36,11 @@ namespace DigitalBallotPlatform.Election.DTOs
         {
             return await Task.Run(() => new PartyModel
             {
+                Id = partyDto.Id,
                 Name = partyDto.Name,
                 Acronym = partyDto.Acronym,
                 ElectionId = partyDto.ElectionId,
+                WatermarkColorId = partyDto.WatermarkColorId,
             });
         }
     }

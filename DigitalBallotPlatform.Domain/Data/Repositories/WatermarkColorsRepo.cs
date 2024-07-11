@@ -4,6 +4,7 @@ using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using DigitalBallotPlatform.Watermark.DTOs;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
@@ -14,7 +15,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                WatermarkColorModel? watermark = await Context.WatermarkColors.FirstOrDefaultAsyncEF(w => w.Id == watermarkColorDTO.Id);
+                WatermarkColorModel? watermark = await Context.WatermarkColors.AsNoTracking().FirstOrDefaultAsyncEF(w => w.Id == watermarkColorDTO.Id);
                 if (watermark == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
@@ -41,7 +42,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                WatermarkColorModel? watermark = await Context.WatermarkColors.FirstOrDefaultAsyncEF(w => w.Id == id);
+                WatermarkColorModel? watermark = await Context.WatermarkColors.AsNoTracking().FirstOrDefaultAsyncEF(w => w.Id == id);
 
                 if (watermark == null)
                 {
