@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
     public class WatermarkRepo(ElectionDbContext context, ILogger logger) : 
-        GenericRepository<WatermarkDTO, ElectionDbContext>(context, logger), IWatermarkRepo
+        GenericRepository<WatermarkModel, ElectionDbContext>(context, logger), IWatermarkRepo
     {
         public async Task<bool> ExecuteUpdateAsync(WatermarkDTO watermarkDTO)
         {

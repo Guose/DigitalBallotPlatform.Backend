@@ -50,7 +50,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return Ok(electionSetupDTO);
             }
 
-            return NotFound(new { Message = $"{nameof(ElectionSetupDTO)} request could not be found." });
+            return BadRequest();
         }
 
         [HttpPut("ElectionSetup/{id}")]
@@ -66,7 +66,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return NoContent();
             }
 
-            return NotFound();
+            return BadRequest();
         }
 
         [HttpDelete("ElectionSetup/{id}")]
@@ -86,7 +86,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return NoContent();
             }
 
-            return NotFound(new { Message = $"{nameof(ElectionSetupDTO)} request could not be found." });
+            return BadRequest();
         }
 
 
@@ -100,16 +100,6 @@ namespace DigitalBallotPlatform.Api.Controllers
                 NotFound(new { Message = $"{nameof(PartyDTO)} request could not be found." });
         }
 
-        [HttpGet("Party/{id}")]
-        public async Task<ActionResult<PartyDTO>> GetPartyById(int id)
-        {
-            PartyDTO? partyDto = await partyRepo.GetPartyByIdAsync(id);
-
-            return partyDto != null ?
-                Ok(partyDto) :
-                NotFound(new { Message = $"{nameof(PartyDTO)} request could not be found." });
-        }
-
         [HttpPost("Party")]
         public async Task<ActionResult> CreateParty([FromBody] PartyDTO partyDto)
         {
@@ -120,43 +110,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return Ok(partyDto);
             }
 
-            return NotFound(new { Message = $"{nameof(PartyDTO)} request could not be found." });
-        }
-
-        [HttpPut("Party/{id}")]
-        public async Task<ActionResult> UpdateParty(int id, [FromBody] PartyDTO partyDto)
-        {
-            if (id != partyDto.Id)
-            {
-                return BadRequest();
-            }
-
-            if (await partyRepo.ExecuteUpdateAsync(partyDto))
-            {
-                return NoContent();
-            }
-
-            return NotFound();
-        }
-
-        [HttpDelete("Party/{id}")]
-        public async Task<ActionResult> DeleteParty(int id)
-        {
-            PartyDTO? partyDto = await partyRepo.GetPartyByIdAsync(id);
-
-            if (partyDto == null)
-            {
-                return NotFound(new { Message = $"{nameof(PartyDTO)} request could not be found." });
-            }
-
-            PartyModel party = await PartyDTO.MapPartyModel(partyDto);
-
-            if (await partyRepo.ExecuteDeleteAsync(party))
-            {
-                return NoContent();
-            }
-
-            return NotFound(new { Message = $"{nameof(PartyDTO)} request could not be found." });
+            return BadRequest();
         }
     }
 }

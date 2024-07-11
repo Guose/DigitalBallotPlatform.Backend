@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
     public class CompanyRepo(ElectionDbContext context, ILogger logger) :
-        GenericRepository<CompanyDTO, ElectionDbContext>(context, logger), ICompanyRepo
+        GenericRepository<CompanyModel, ElectionDbContext>(context, logger), ICompanyRepo
     {
         public async Task<bool> ExecuteUpdateAsync(CompanyDTO companyDto)
         {

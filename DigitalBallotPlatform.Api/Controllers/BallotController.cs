@@ -60,7 +60,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return Ok(ballotCategory);
             }
 
-            return NotFound(new { Message = $"{nameof(BallotCategoryDTO)} request could not be found." });
+            return BadRequest();
         }
 
         [HttpPut("BallotCategory/{id}")]
@@ -76,7 +76,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return Ok(ballotCategoryDto);
             }
 
-            return NotFound(new { Message = $"{nameof(BallotCategoryDTO)} request could not be found." });
+            return BadRequest();
         }
 
         [HttpDelete("BallotCategory/{id}")]
@@ -96,7 +96,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return NoContent();
             }
 
-            return NotFound();
+            return BadRequest();
         }
 
         [HttpGet("BallotMaterial")]
@@ -129,7 +129,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return Ok(ballotMaterial);
             }
 
-            return NotFound(new { Message = $"{nameof(BallotMaterialDTO)} request could not be found." });
+            return BadRequest();
         }
 
         [HttpPut("BallotMaterial/{id}")]
@@ -145,7 +145,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return Ok(ballotMaterialDto);
             }
 
-            return NotFound(new { Message = $"{nameof(BallotMaterialDTO)} Id: {id} request could not be found." });
+            return BadRequest();
         }
 
         [HttpDelete("BallotMaterial/{id}")]
@@ -165,7 +165,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return NoContent();
             }
 
-            return NotFound(new { Message = $"{nameof(BallotMaterialDTO)} Id: {id} request could not be found." });
+            return BadRequest();
         }
 
         [HttpGet("BallotSpec")]
@@ -198,7 +198,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return Ok(ballotSpec);
             }
 
-            return NotFound(new { Message = $"{nameof(BallotSpecDTO)} request could not be found." });
+            return BadRequest();
         }
 
         [HttpPut("BallotSpec/{id}")]
@@ -214,7 +214,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return Ok(ballotSpecDto);
             }
 
-            return NotFound(new { Message = $"{nameof(BallotSpecDTO)} Id: {id} request could not be found." });
+            return BadRequest();
         }
 
         [HttpDelete("BallotSpec/{id}")]
@@ -234,7 +234,7 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return NoContent();
             }
 
-            return NotFound(new { Message = $"{nameof(BallotSpecDTO)} Id: {id} request could not be found." });
+            return BadRequest();
         }
     }
 }

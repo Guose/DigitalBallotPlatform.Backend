@@ -42,9 +42,19 @@ namespace DigitalBallotPlatform.Api
             builder.Services.AddScoped<IBallotSpecRepo, BallotSpecRepo>();
             builder.Services.AddScoped<IElectionSetupRepo, ElectionSetupRepo>();
             builder.Services.AddScoped<IPartyRepo, PartyRepo>();
+            builder.Services.AddScoped<ICompanyRepo, CompanyRepo>();
+            builder.Services.AddScoped<ICountyRepo, CountyRepo>();
+            builder.Services.AddScoped<IPlatformUserRepo, PlatformUserRepo>();
+            builder.Services.AddScoped<IRoleRepo, RoleRepo>();
+            builder.Services.AddScoped<IWatermarkColorsRepo, WatermarkColorsRepo>();
+            builder.Services.AddScoped<IWatermarkRepo, WatermarkRepo>();
 
+            // Add controllers to the container.
             builder.Services.AddScoped<BallotController>();
             builder.Services.AddScoped<ElectionSetupController>();
+            builder.Services.AddScoped<CountyController>();
+            builder.Services.AddScoped<PlatformController>();
+            builder.Services.AddScoped<WatermarkController>();
 
             // Add SQL Server connection strings
             var electionDbConnStrSQL = configuration.GetConnectionString("SQLElectionDbConnection");
@@ -79,20 +89,20 @@ namespace DigitalBallotPlatform.Api
                 app.UseSwaggerUI();
             }
 
-            //app.UseWebSockets();
+            app.UseWebSockets();
 
-            //app.Use(async (context, next) =>
-            //{
-            //    if (context.WebSockets.IsWebSocketRequest)
-            //    {
-            //        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-            //        await HandleWebSocket(context, webSocket);
-            //    }
-            //    else
-            //    {
-            //        await next();
-            //    }
-            //});
+            app.Use(async (context, next) =>
+            {
+                if (context.WebSockets.IsWebSocketRequest)
+                {
+                    var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                    await HandleWebSocket(context, webSocket);
+                }
+                else
+                {
+                    await next();
+                }
+            });
 
             app.UseHttpsRedirection();
 
