@@ -27,8 +27,6 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 Context.BallotMaterials.Update(ballotMaterial);
                 await SaveAsync();
 
-                Logger.LogInformation("[INFO] {1} Message: Entity {0} has been updated", nameof(BallotMaterialModel), nameof(ExecuteUpdateAsync));
-
                 return true;
             }
             catch (Exception ex)

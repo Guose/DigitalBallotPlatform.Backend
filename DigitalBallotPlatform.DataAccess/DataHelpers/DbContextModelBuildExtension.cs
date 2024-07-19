@@ -38,6 +38,12 @@ namespace DigitalBallotPlatform.DataAccess.DataHelpers
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey<CountyModel>(a => a.AddressId);
 
+            modelBuilder.Entity<BallotCategoryModel>()
+                .HasOne(s => s.BallotSpec)
+                .WithMany(c => c.BallotCategories)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(s => s.BallotSpecId);
+
             modelBuilder.Entity<BallotSpecModel>()
                 .HasMany(b => b.Elections)
                 .WithOne(e => e.BallotSpec)

@@ -7,7 +7,7 @@ namespace DigitalBallotPlatform.Ballot.DTOs
     {
         public int Id { get; set; }
         public BallotCategoryType Category { get; set; }
-        public SubCategoryType SubCategory { get; set; } = default;
+        public SubCategoryType? SubCategory { get; set; } = 0;
         public LATestDeckType? LARotation { get; set; }
         public string Description { get; set; } = string.Empty;
         public bool IsTestdeck { get; set; }

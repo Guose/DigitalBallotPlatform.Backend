@@ -98,6 +98,16 @@ namespace DigitalBallotPlatform.Api.Controllers
                 NotFound(new { Message = $"{nameof(RoleDTO)} request could not be found." });
         }
 
+        [HttpGet("Role/{id}")]
+        public async Task<ActionResult<RoleDTO>> GetRoleById(int id)
+        {
+            RoleDTO? role = await roleRepo.GetRoleByIdAsync(id);
+
+            return role != null ?
+                Ok(role) :
+                NotFound(new { Message = $"{nameof(RoleDTO)} request could not be found." });
+        }
+
         [HttpPost("Role")]
         public async Task<ActionResult> CreateRole([FromBody] RoleDTO roleDto)
         {

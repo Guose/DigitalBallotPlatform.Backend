@@ -52,3 +52,53 @@ System.InvalidOperationException: The instance of entity type 'PartyModel' canno
    at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.ExecuteDeleteAsync(TEntity model) in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 44
 2024-07-10 19:55:53.164 -07:00 [INF] [INFO] GetPartyByIdAsync Message: Entity PartyModel query for Id: 1 was successfull
 2024-07-10 20:21:20.541 -07:00 [INF] [INFO] GetPartyByIdAsync Message: Entity PartyModel query for Id: 1 was successfull
+2024-07-12 00:10:47.607 -07:00 [ERR] GetAllAsync:BallotCategoryModel Message: Data is Null. This method or property cannot be called on Null values. InnerException: null
+System.Data.SqlTypes.SqlNullValueException: Data is Null. This method or property cannot be called on Null values.
+   at Microsoft.Data.SqlClient.SqlBuffer.ThrowIfNull()
+   at Microsoft.Data.SqlClient.SqlBuffer.get_Byte()
+   at Microsoft.Data.SqlClient.SqlDataReader.GetByte(Int32 i)
+   at lambda_method171(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.GetAllAsync() in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 60
+2024-07-12 00:11:05.994 -07:00 [ERR] GetAllAsync:BallotCategoryModel Message: Data is Null. This method or property cannot be called on Null values. InnerException: null
+System.Data.SqlTypes.SqlNullValueException: Data is Null. This method or property cannot be called on Null values.
+   at Microsoft.Data.SqlClient.SqlBuffer.ThrowIfNull()
+   at Microsoft.Data.SqlClient.SqlBuffer.get_Byte()
+   at Microsoft.Data.SqlClient.SqlDataReader.GetByte(Int32 i)
+   at lambda_method171(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.GetAllAsync() in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 60
+2024-07-12 00:11:52.379 -07:00 [ERR] GetAllAsync:BallotCategoryModel Message: Data is Null. This method or property cannot be called on Null values. InnerException: null
+System.Data.SqlTypes.SqlNullValueException: Data is Null. This method or property cannot be called on Null values.
+   at Microsoft.Data.SqlClient.SqlBuffer.ThrowIfNull()
+   at Microsoft.Data.SqlClient.SqlBuffer.get_Byte()
+   at Microsoft.Data.SqlClient.SqlDataReader.GetByte(Int32 i)
+   at lambda_method171(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.GetAllAsync() in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 60
+2024-07-12 00:17:07.707 -07:00 [ERR] GetAllAsync:BallotCategoryModel Message: Data is Null. This method or property cannot be called on Null values. InnerException: null
+System.Data.SqlTypes.SqlNullValueException: Data is Null. This method or property cannot be called on Null values.
+   at Microsoft.Data.SqlClient.SqlBuffer.ThrowIfNull()
+   at Microsoft.Data.SqlClient.SqlBuffer.get_Byte()
+   at Microsoft.Data.SqlClient.SqlDataReader.GetByte(Int32 i)
+   at lambda_method171(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.GetAllAsync() in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 60
+2024-07-12 00:32:16.897 -07:00 [ERR] GetAllAsync:BallotCategoryModel Message: Data is Null. This method or property cannot be called on Null values. InnerException: null
+System.Data.SqlTypes.SqlNullValueException: Data is Null. This method or property cannot be called on Null values.
+   at Microsoft.Data.SqlClient.SqlBuffer.ThrowIfNull()
+   at Microsoft.Data.SqlClient.SqlBuffer.get_Byte()
+   at Microsoft.Data.SqlClient.SqlDataReader.GetByte(Int32 i)
+   at lambda_method171(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.GetAllAsync() in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 60

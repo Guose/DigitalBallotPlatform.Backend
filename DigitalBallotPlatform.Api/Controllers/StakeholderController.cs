@@ -10,12 +10,12 @@ namespace DigitalBallotPlatform.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CountyController : ControllerBase
+    public class StakeholderController : ControllerBase
     {
         private readonly ICountyRepo countyRepo;
         private readonly ICompanyRepo companyRepo;
 
-        public CountyController(ICountyRepo countyRepo, ICompanyRepo companyRepo)
+        public StakeholderController(ICountyRepo countyRepo, ICompanyRepo companyRepo)
         {
             this.countyRepo = countyRepo;
             this.companyRepo = companyRepo;

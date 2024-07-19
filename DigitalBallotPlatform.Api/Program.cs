@@ -26,14 +26,14 @@ namespace DigitalBallotPlatform.Api
 
             builder.Services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
-            builder.WebHost.ConfigureKestrel(options =>
-            {
-                options.ListenLocalhost(5001);
-                options.ListenLocalhost(7300, listenOpts =>
-                {
-                    listenOpts.UseHttps();
-                });
-            });
+            //builder.WebHost.ConfigureKestrel(options =>
+            //{
+            //    options.ListenLocalhost(5001);
+            //    options.ListenLocalhost(7300, listenOpts =>
+            //    {
+            //        listenOpts.UseHttps();
+            //    });
+            //});
 
             // Add services to the container.
             builder.Services.AddSingleton<ILogger, Logger>();
@@ -52,7 +52,7 @@ namespace DigitalBallotPlatform.Api
             // Add controllers to the container.
             builder.Services.AddScoped<BallotController>();
             builder.Services.AddScoped<ElectionSetupController>();
-            builder.Services.AddScoped<CountyController>();
+            builder.Services.AddScoped<StakeholderController>();
             builder.Services.AddScoped<PlatformController>();
             builder.Services.AddScoped<WatermarkController>();
 
