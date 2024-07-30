@@ -31,13 +31,20 @@ namespace DigitalBallotPlatform.Api.Controllers
         }
 
         [HttpGet("BallotCategory")]
-        public async Task<ActionResult<IEnumerable<BallotCategoryDTO>>> GetBallotCategories()
+        public async Task<ActionResult<List<BallotCategoryDTO>>> GetBallotCategories()
         {
             IEnumerable<BallotCategoryModel> ballotCategories = await ballotCategoryRepo.GetAllAsync();
 
-            return ballotCategories != null ?
-                Ok(ballotCategories) :
-                NotFound(new { Message = $"{nameof(BallotCategoryDTO)} request could not be found." });
+            if (ballotCategories == null || !ballotCategories.Any())
+            {
+                return NotFound(new { Message = $"{nameof(BallotCategoryDTO)} request could not be found." });
+            }
+
+            var ballotCategoryDTOs = await Task.WhenAll(ballotCategories.Select(async category =>
+                await BallotCategoryDTO.MapBallotCategoryDto(category)
+            ));
+
+            return Ok(ballotCategoryDTOs.ToList());
         }
 
         [HttpGet("BallotCategory/{id}")]
