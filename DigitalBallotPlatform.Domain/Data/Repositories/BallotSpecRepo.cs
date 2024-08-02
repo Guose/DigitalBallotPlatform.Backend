@@ -38,7 +38,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             }
         }
 
-        public async Task<BallotSpecDTO?> GetBallotSpecByIdAsync(int id)
+        public async Task<BallotSpecModel?> GetBallotSpecByIdAsync(int id)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
 
                 Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(BallotSpecModel), nameof(GetBallotSpecByIdAsync), id);
 
-                return await BallotSpecDTO.MapBallotSpecDto(ballotSpec);
+                return ballotSpec;
             }
             catch (Exception ex)
             {

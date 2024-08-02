@@ -36,7 +36,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             }
         }
 
-        public async Task<BallotCategoryDTO?> GetBallotCategoryByIdAsync(int id)
+        public async Task<BallotCategoryModel?> GetBallotCategoryByIdAsync(int id)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                     return null;
                 }
 
-                return await BallotCategoryDTO.MapBallotCategoryDto(ballotCategory);
+                return ballotCategory;
             }
             catch (Exception ex)
             {

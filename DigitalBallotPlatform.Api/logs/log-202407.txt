@@ -102,3 +102,14 @@ System.Data.SqlTypes.SqlNullValueException: Data is Null. This method or propert
    at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
    at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
    at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.GetAllAsync() in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 60
+2024-07-31 01:47:27.925 -07:00 [INF] [INFO] GetBallotMaterialByIdAsync Message: Entity BallotMaterialModel query for Id: 2 was successfull
+2024-07-31 01:47:28.060 -07:00 [ERR] ExecuteDeleteAsync:BallotMaterialModel Message: The property 'BallotMaterialModel.Id' has a temporary value while attempting to change the entity's state to 'Deleted'. Either set a permanent value explicitly, or ensure that the database is configured to generate values for this property. InnerException: null
+System.InvalidOperationException: The property 'BallotMaterialModel.Id' has a temporary value while attempting to change the entity's state to 'Deleted'. Either set a permanent value explicitly, or ensure that the database is configured to generate values for this property.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState oldState, EntityState newState, Boolean acceptChanges, Boolean modifyProperties)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState entityState, Boolean acceptChanges, Boolean modifyProperties, Nullable`1 forceStateWhenUnknownKey, Nullable`1 fallbackState)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.set_State(EntityState value)
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.Remove(TEntity entity)
+   at DigitalBallotPlatform.Domain.Data.Repositories.GenericRepository`2.ExecuteDeleteAsync(TEntity model) in C:\Users\Guose\source\repos\GitHubRepos\DigitalBallotPlatform\Backend\DigitalBallotPlatform.Domain\Data\Repositories\GenericRepository.cs:line 44
+2024-07-31 01:47:46.762 -07:00 [INF] [INFO] GetBallotMaterialByIdAsync Message: Entity BallotMaterialModel query for Id: 2 was successfull
+2024-07-31 01:48:41.327 -07:00 [INF] [INFO] GetBallotMaterialByIdAsync Message: Entity BallotMaterialModel query for Id: 2 was successfull
+2024-07-31 02:05:07.985 -07:00 [INF] [INFO] GetBallotMaterialByIdAsync Message: Entity BallotMaterialModel query for Id: 2 was successfull

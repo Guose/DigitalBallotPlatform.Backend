@@ -1,6 +1,7 @@
 ﻿using DigitalBallotPlatform.Domain.Data.Interfaces;
 using DigitalBallotPlatform.Platform.DTOs;
 using DigitalBallotPlatform.Shared.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,7 +21,7 @@ namespace DigitalBallotPlatform.Api.Controllers
             this.roleRepo = roleRepo;
         }
 
-        [HttpGet("User")]
+        [HttpGet("Users")]
         public async Task<ActionResult<IEnumerable<PlatformUserDTO>>> GetUsers()
         {
             IEnumerable<PlatformUserModel> users = await platformUserRepo.GetAllAsync();
@@ -30,7 +31,18 @@ namespace DigitalBallotPlatform.Api.Controllers
                 NotFound(new { Message = $"{nameof(PlatformUserDTO)} request could not be found." });
         }
 
+        [HttpGet($"User")]
+        public async Task<ActionResult<PlatformUserDTO>> GetUsersByUsername([FromBody] string username)
+        {
+            PlatformUserDTO? user = await platformUserRepo.GetUserByUserNameAsync(username);
+
+            return user != null ?
+                Ok(user) :
+                NotFound(new { Message = $"{nameof(PlatformUserDTO)} request could not be found." });
+        }
+
         [HttpGet("User/{id}")]
+        [Authorize]
         public async Task<ActionResult<PlatformUserDTO>> GetUsersById(Guid id)
         {
             PlatformUserDTO? user = await platformUserRepo.GetUserByIdAsync(id);

@@ -1,6 +1,7 @@
 ﻿using DigitalBallotPlatform.Ballot.DTOs;
 using DigitalBallotPlatform.Domain.Data.Interfaces;
 using DigitalBallotPlatform.Shared.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ILogger = DigitalBallotPlatform.Shared.Logger.ILogger;
 
@@ -31,6 +32,7 @@ namespace DigitalBallotPlatform.Api.Controllers
         }
 
         [HttpGet("BallotCategory")]
+        [Authorize]
         public async Task<ActionResult<List<BallotCategoryDTO>>> GetBallotCategories()
         {
             IEnumerable<BallotCategoryModel> ballotCategories = await ballotCategoryRepo.GetAllAsync();
@@ -50,11 +52,11 @@ namespace DigitalBallotPlatform.Api.Controllers
         [HttpGet("BallotCategory/{id}")]
         public async Task<ActionResult<BallotCategoryDTO>> GetBallotCategoryById(int id)
         {
-            BallotCategoryDTO? ballotCategory = await ballotCategoryRepo.GetBallotCategoryByIdAsync(id);
+            BallotCategoryModel? ballotCategory = await ballotCategoryRepo.GetBallotCategoryByIdAsync(id);
 
             return ballotCategory != null ?
                 Ok(ballotCategory) :
-                NotFound(new { Message = $"{nameof(BallotCategoryDTO)} request could not be found." });
+                NotFound(new { Message = $"{nameof(BallotCategoryModel)} request could not be found." });
         }
 
         [HttpPost("BallotCategory")]
@@ -89,16 +91,14 @@ namespace DigitalBallotPlatform.Api.Controllers
         [HttpDelete("BallotCategory/{id}")]
         public async Task<ActionResult> DeleteBallotCategory(int id)
         {
-            BallotCategoryDTO? ballotCategoryDto = await ballotCategoryRepo.GetBallotCategoryByIdAsync(id);
+            BallotCategoryModel? ballotCategory = await ballotCategoryRepo.GetBallotCategoryByIdAsync(id);
 
-            if (ballotCategoryDto == null)
+            if (ballotCategory == null)
             {
                 return NotFound();
             }
 
-            BallotCategoryModel ballotMapped = await BallotCategoryDTO.MapBallotCategoryModel(ballotCategoryDto);
-
-            if (await ballotCategoryRepo.ExecuteDeleteAsync(ballotMapped))
+            if (await ballotCategoryRepo.ExecuteDeleteAsync(ballotCategory))
             {
                 return NoContent();
             }
@@ -119,7 +119,7 @@ namespace DigitalBallotPlatform.Api.Controllers
         [HttpGet("BallotMaterial/{id}")]
         public async Task<ActionResult<BallotMaterialDTO>> GetBallotMaterialById(int id)
         {
-            BallotMaterialDTO? ballotMaterial = await ballotMaterialRepo.GetBallotMaterialByIdAsync(id);
+            BallotMaterialModel? ballotMaterial = await ballotMaterialRepo.GetBallotMaterialByIdAsync(id);
 
             return ballotMaterial != null ?
                 Ok(ballotMaterial) :
@@ -158,16 +158,14 @@ namespace DigitalBallotPlatform.Api.Controllers
         [HttpDelete("BallotMaterial/{id}")]
         public async Task<ActionResult> DeleteBallotMaterial(int id)
         {
-            BallotMaterialDTO? ballotMaterialDto = await ballotMaterialRepo.GetBallotMaterialByIdAsync(id);
+            BallotMaterialModel? ballotMaterial = await ballotMaterialRepo.GetBallotMaterialByIdAsync(id);
 
-            if (ballotMaterialDto == null)
+            if (ballotMaterial == null)
             {
-                return NotFound(new { Message = $"{nameof(BallotMaterialDTO)} Id: {id} request could not be found." });
+                return NotFound(new { Message = $"{nameof(BallotMaterialModel)} Id: {id} request could not be found." });
             }
 
-            BallotMaterialModel ballotMapped = await BallotMaterialDTO.MapBallotMaterialModel(ballotMaterialDto);
-
-            if (await ballotMaterialRepo.ExecuteDeleteAsync(ballotMapped))
+            if (await ballotMaterialRepo.ExecuteDeleteAsync(ballotMaterial))
             {
                 return NoContent();
             }
@@ -188,11 +186,11 @@ namespace DigitalBallotPlatform.Api.Controllers
         [HttpGet("BallotSpec/{id}")]
         public async Task<ActionResult<BallotSpecDTO>> GetBallotSpecById(int id)
         {
-            BallotSpecDTO? ballotSpecDto = await ballotSpecRepo.GetBallotSpecByIdAsync(id);
+            BallotSpecModel? ballotSpecDto = await ballotSpecRepo.GetBallotSpecByIdAsync(id);
 
             return ballotSpecDto != null ?
                 Ok(ballotSpecDto) :
-                NotFound(new { Message = $"{nameof(BallotSpecDTO)} request could not be found." });
+                NotFound(new { Message = $"{nameof(BallotSpecModel)} request could not be found." });
         }
 
         [HttpPost("BallotSpec")]
@@ -227,16 +225,14 @@ namespace DigitalBallotPlatform.Api.Controllers
         [HttpDelete("BallotSpec/{id}")]
         public async Task<ActionResult> DeleteBallotSpec(int id)
         {
-            BallotSpecDTO? ballotSpecDto = await ballotSpecRepo.GetBallotSpecByIdAsync(id);
+            BallotSpecModel? ballotSpec = await ballotSpecRepo.GetBallotSpecByIdAsync(id);
 
-            if (ballotSpecDto == null)
+            if (ballotSpec == null)
             {
-                return NotFound(new { Message = $"{nameof(BallotSpecDTO)} Id: {id} request could not be found." });
+                return NotFound(new { Message = $"{nameof(BallotSpecModel)} Id: {id} request could not be found." });
             }
 
-            BallotSpecModel ballotMapped = await BallotSpecDTO.MapBallotSpecModel(ballotSpecDto);
-
-            if (await ballotSpecRepo.ExecuteDeleteAsync(ballotMapped))
+            if (await ballotSpecRepo.ExecuteDeleteAsync(ballotSpec))
             {
                 return NoContent();
             }

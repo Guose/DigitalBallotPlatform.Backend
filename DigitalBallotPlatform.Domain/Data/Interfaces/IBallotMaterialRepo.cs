@@ -6,6 +6,6 @@ namespace DigitalBallotPlatform.Domain.Data.Interfaces
     public interface IBallotMaterialRepo : IGenericRepository<BallotMaterialModel>
     {
         Task<bool> ExecuteUpdateAsync(BallotMaterialDTO ballotMaterialDTO);
-        Task<BallotMaterialDTO?> GetBallotMaterialByIdAsync(int id);
+        Task<BallotMaterialModel?> GetBallotMaterialByIdAsync(int id);
     }
 }

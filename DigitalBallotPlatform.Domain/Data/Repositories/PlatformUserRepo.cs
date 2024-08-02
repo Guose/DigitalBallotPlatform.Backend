@@ -61,5 +61,28 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 throw new ArgumentException(ex.Message);
             }
         }
+
+        public async Task<PlatformUserDTO?> GetUserByUserNameAsync(string username)
+        {
+            try
+            {
+                PlatformUserModel? user = await Context.PlatformUsers.AsNoTracking().SingleOrDefaultAsync(u => u.Username == username);
+
+                if (user == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(GetUserByUserNameAsync), this);
+                    return null;
+                }
+
+                Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(PlatformUserModel), nameof(GetUserByUserNameAsync), user.Id);
+
+                return await PlatformUserDTO.MapPlatformUserDto(user);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(GetUserByUserNameAsync));
+                throw new ArgumentException(ex.Message);
+            }
+        }
     }
 }
