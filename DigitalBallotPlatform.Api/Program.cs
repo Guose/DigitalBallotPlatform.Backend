@@ -112,7 +112,7 @@ namespace DigitalBallotPlatform.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "JWT Auth API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JWT Auth API", Version = "v1" });
 
                 var securitySchema = new OpenApiSecurityScheme
                 {

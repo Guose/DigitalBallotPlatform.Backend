@@ -1,5 +1,6 @@
 ﻿using DigitalBallotPlatform.Ballot.DTOs;
 using DigitalBallotPlatform.Domain.Data.Interfaces;
+using DigitalBallotPlatform.Domain.Data.Repositories;
 using DigitalBallotPlatform.Shared.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ namespace DigitalBallotPlatform.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BallotController : ControllerBase
     {
         private readonly IBallotCategoryRepo ballotCategoryRepo;
@@ -32,7 +34,6 @@ namespace DigitalBallotPlatform.Api.Controllers
         }
 
         [HttpGet("BallotCategory")]
-        [Authorize]
         public async Task<ActionResult<List<BallotCategoryDTO>>> GetBallotCategories()
         {
             IEnumerable<BallotCategoryModel> ballotCategories = await ballotCategoryRepo.GetAllAsync();
@@ -176,10 +177,10 @@ namespace DigitalBallotPlatform.Api.Controllers
         [HttpGet("BallotSpec")]
         public async Task<ActionResult<IEnumerable<BallotSpecDTO>>> GetBallotSpecs()
         {
-            IEnumerable<BallotMaterialModel> ballotMaterials = await ballotMaterialRepo.GetAllAsync();
+            IEnumerable<BallotSpecModel> ballotSpecs = await ballotSpecRepo.GetAllAsync();
 
-            return ballotMaterials != null ?
-                Ok(ballotMaterials) :
+            return ballotSpecs != null ?
+                Ok(ballotSpecs) :
                 NotFound(new { Message = $"{nameof(BallotSpecDTO)} request could not be found." });
         }
 
