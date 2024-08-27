@@ -2,6 +2,7 @@
 using DigitalBallotPlatform.County.DTOs;
 using DigitalBallotPlatform.Domain.Data.Interfaces;
 using DigitalBallotPlatform.Shared.Models;
+using DigitalBallotPlatform.Shared.Types;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -29,6 +30,28 @@ namespace DigitalBallotPlatform.Api.Controllers
             return countyDtos != null ?
                 Ok(countyDtos) :
                 NotFound(new { Message = $"{nameof(CountyDTO)} request could not be found." });
+        }
+
+        [HttpGet("County/BallotSystemType")]
+        public IActionResult GetCountyBallotSystemTypes()
+        {
+            var ballotSystemTypes = Enum.GetValues(typeof(BallotSystemType))
+                .Cast<BallotSystemType>()
+                .Select(bt => new { Id = (byte)bt, Name = bt.ToString() })
+                .ToList();
+
+            return Ok(ballotSystemTypes); 
+        }
+
+        [HttpGet("County/VoterSystemType")]
+        public IActionResult GetCountyVoterSystemTypes()
+        {
+            var voterSystemTypes = Enum.GetValues(typeof(VoterSystemType))
+                .Cast<VoterSystemType>()
+                .Select(bt => new { Id = (byte)bt, Name = bt.ToString() })
+                .ToList();
+
+            return Ok(voterSystemTypes);
         }
 
         [HttpGet("County/{id}")]
