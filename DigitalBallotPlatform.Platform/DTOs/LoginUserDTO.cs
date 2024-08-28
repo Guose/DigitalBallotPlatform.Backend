@@ -4,5 +4,11 @@
     {
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+        public double AuthInterval { get; set; }
+
+        public LoginUserDTO()
+        {
+            AuthInterval = 1;
+        }
     }
 }
