@@ -18,7 +18,7 @@ namespace DigitalBallotPlatform.Api.Controllers
             this.userRepo = userRepo;
         }
 
-        [HttpPost("Login")]
+        [HttpPost("AuthenticateUser")]
         public async Task<IActionResult> Login([FromBody] LoginUserDTO login)
         {
             PlatformUserDTO? userDto = await userRepo.ValidateUsernameAsync(login.Username);

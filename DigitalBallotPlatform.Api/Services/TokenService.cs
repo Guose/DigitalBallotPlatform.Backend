@@ -25,7 +25,12 @@ namespace DigitalBallotPlatform.Api.Services
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("username", username), new Claim("password", password) }),
+                Subject = new ClaimsIdentity(new[] 
+                { 
+                    new Claim(ClaimTypes.Name, username),
+                    new Claim("username", username), 
+                    new Claim("password", password) 
+                }),
                 Expires = DateTime.UtcNow.AddHours(interval),
                 Issuer = issuer,
                 Audience = audience,
@@ -68,6 +73,7 @@ namespace DigitalBallotPlatform.Api.Services
             {
                 return null;
             }
+        
         }
     }
 }
