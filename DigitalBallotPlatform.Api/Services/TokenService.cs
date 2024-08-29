@@ -18,15 +18,15 @@ namespace DigitalBallotPlatform.Api.Services
             audience = config.GetValue<string>("JwtSettings:Audience")!;
         }
 
-        public string GenerateToken(string username)
+        public string GenerateToken(string username, string password, double interval)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secret);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("username", username) }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Subject = new ClaimsIdentity(new[] { new Claim("username", username), new Claim("password", password) }),
+                Expires = DateTime.UtcNow.AddHours(interval),
                 Issuer = issuer,
                 Audience = audience,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -34,6 +34,40 @@ namespace DigitalBallotPlatform.Api.Services
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public ClaimsPrincipal? GetPrincipalFromExpiredToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(secret);
+
+            try
+            {
+                var tokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = issuer,
+                    ValidAudience = audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateLifetime = false // We don't care if the token is expired here
+                };
+
+                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
+
+                if (securityToken is not JwtSecurityToken jwtSecurityToken ||
+                    !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    throw new SecurityTokenException("Invalid token");
+                }
+
+                return principal;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

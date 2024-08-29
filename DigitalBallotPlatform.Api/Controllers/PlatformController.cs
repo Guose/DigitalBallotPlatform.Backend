@@ -34,7 +34,7 @@ namespace DigitalBallotPlatform.Api.Controllers
         [HttpGet($"User")]
         public async Task<ActionResult<PlatformUserDTO>> GetUsersByUsername([FromBody] string username)
         {
-            PlatformUserDTO? user = await platformUserRepo.GetUserByUserNameAsync(username);
+            PlatformUserDTO? user = await platformUserRepo.ValidateUsernameAsync(username);
 
             return user != null ?
                 Ok(user) :

@@ -62,7 +62,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             }
         }
 
-        public async Task<PlatformUserDTO?> GetUserByUserNameAsync(string username)
+        public async Task<PlatformUserDTO?> ValidateUsernameAsync(string username)
         {
             try
             {
@@ -70,17 +70,17 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
 
                 if (user == null)
                 {
-                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(GetUserByUserNameAsync), this);
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ValidateUsernameAsync), this);
                     return null;
                 }
 
-                Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(PlatformUserModel), nameof(GetUserByUserNameAsync), user.Id);
+                Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(PlatformUserModel), nameof(ValidateUsernameAsync), user.Id);
 
                 return await PlatformUserDTO.MapPlatformUserDto(user);
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(GetUserByUserNameAsync));
+                Logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(ValidateUsernameAsync));
                 throw new ArgumentException(ex.Message);
             }
         }

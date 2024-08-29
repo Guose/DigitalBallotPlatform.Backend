@@ -7,6 +7,6 @@ namespace DigitalBallotPlatform.Domain.Data.Interfaces
     {
         Task<bool> ExecuteUpdateAsync(PlatformUserDTO userDto);
         Task<PlatformUserDTO?> GetUserByIdAsync(Guid id);
-        Task<PlatformUserDTO?> GetUserByUserNameAsync(string username);
+        Task<PlatformUserDTO?> ValidateUsernameAsync(string username);
     }
 }
