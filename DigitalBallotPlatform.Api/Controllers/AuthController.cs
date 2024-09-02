@@ -28,9 +28,9 @@ namespace DigitalBallotPlatform.Api.Controllers
                 return NotFound("Username does not exist");
             }
 
-            if (login.Username == userDto.Username && login.Password == userDto.Password)
+            if (login.Username == userDto.Username && BCrypt.Net.BCrypt.Verify(login.Password, userDto.Password))
             {
-                var token = tokenService.GenerateToken(login.Username, login.Password, login.AuthInterval);
+                var token = tokenService.GenerateToken(userDto.Username, userDto.Id, login.AuthInterval);
                 return Ok(new { User = userDto, Token = token });
             }
 
@@ -59,8 +59,21 @@ namespace DigitalBallotPlatform.Api.Controllers
             }
 
             // Generate a new token with an extended expiration
-            var newToken = tokenService.GenerateToken(userDto.Username, userDto.Password, request.AuthInterval);
+            var newToken = tokenService.GenerateToken(userDto.Username, userDto.Id, request.AuthInterval);
             return Ok(new { Token = newToken });
+        }
+
+        [HttpGet()]
+        public async Task<IActionResult> GetUserFromUsername(string username)
+        {
+            PlatformUserDTO? userDto = await userRepo.ValidateUsernameAsync(username);
+
+            if (userDto == null)
+            {
+                return NotFound("Username does not exist");
+            }
+
+            return Ok(new { User = userDto });
         }
     }
 }

@@ -84,6 +84,16 @@ namespace DigitalBallotPlatform.Api
             
             builder.Services.AddScoped<TokenService>();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    corsBuilder => corsBuilder
+                        .WithOrigins("http://localhost:3001") // Express.js frontend server
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
+
             var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:SecretKey"]!);
 
             builder.Services.AddAuthentication(options =>
@@ -150,6 +160,8 @@ namespace DigitalBallotPlatform.Api
             }
 
             app.UseWebSockets();
+
+            app.UseCors("CorsPolicy");
 
             app.Use(async (context, next) =>
             {

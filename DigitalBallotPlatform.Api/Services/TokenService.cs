@@ -18,7 +18,7 @@ namespace DigitalBallotPlatform.Api.Services
             audience = config.GetValue<string>("JwtSettings:Audience")!;
         }
 
-        public string GenerateToken(string username, string password, double interval)
+        public string GenerateToken(string username, Guid userId, double interval)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secret);
@@ -28,8 +28,7 @@ namespace DigitalBallotPlatform.Api.Services
                 Subject = new ClaimsIdentity(new[] 
                 { 
                     new Claim(ClaimTypes.Name, username),
-                    new Claim("username", username), 
-                    new Claim("password", password) 
+                    new Claim("userId", userId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(interval),
                 Issuer = issuer,
@@ -56,7 +55,7 @@ namespace DigitalBallotPlatform.Api.Services
                     ValidIssuer = issuer,
                     ValidAudience = audience,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateLifetime = false // We don't care if the token is expired here
+                    ValidateLifetime = false
                 };
 
                 var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
