@@ -4,17 +4,18 @@ using DigitalBallotPlatform.Platform.DTOs;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
     public class PlatformUserRepo(ElectionDbContext context, ILogger logger) : 
-        GenericRepository<PlatformUserDTO, ElectionDbContext>(context, logger), IPlatformUserRepo
+        GenericRepository<PlatformUserModel, ElectionDbContext>(context, logger), IPlatformUserRepo
     {
         public async Task<bool> ExecuteUpdateAsync(PlatformUserDTO userDto)
         {
             try
             {
-                PlatformUserModel? user = await Context.PlatformUsers.FirstOrDefaultAsyncEF(u => u.Id == userDto.Id);
+                PlatformUserModel? user = await Context.PlatformUsers.AsNoTracking().FirstOrDefaultAsyncEF(u => u.Id == userDto.Id);
 
                 if (user == null)
                 {
@@ -42,7 +43,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                PlatformUserModel? user = await Context.PlatformUsers.FirstOrDefaultAsyncEF(u => u.Id == id);
+                PlatformUserModel? user = await Context.PlatformUsers.AsNoTracking().FirstOrDefaultAsyncEF(u => u.Id == id);
 
                 if (user == null)
                 {
@@ -57,6 +58,29 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             catch (Exception ex)
             {
                 Logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(GetUserByIdAsync));
+                throw new ArgumentException(ex.Message);
+            }
+        }
+
+        public async Task<PlatformUserDTO?> ValidateUsernameAsync(string username)
+        {
+            try
+            {
+                PlatformUserModel? user = await Context.PlatformUsers.AsNoTracking().SingleOrDefaultAsync(u => u.Username == username);
+
+                if (user == null)
+                {
+                    Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ValidateUsernameAsync), this);
+                    return null;
+                }
+
+                Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(PlatformUserModel), nameof(ValidateUsernameAsync), user.Id);
+
+                return await PlatformUserDTO.MapPlatformUserDto(user);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "[ERROR] {2} Message: {0} InnerException: {1}", ex.Message, ex.InnerException!, nameof(ValidateUsernameAsync));
                 throw new ArgumentException(ex.Message);
             }
         }

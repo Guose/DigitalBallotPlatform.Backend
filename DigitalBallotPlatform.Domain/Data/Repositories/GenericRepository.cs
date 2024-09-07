@@ -1,5 +1,7 @@
 ﻿using DigitalBallotPlatform.Domain.Data.Interfaces;
+using DigitalBallotPlatform.Platform.Helpers;
 using DigitalBallotPlatform.Shared.Logger;
+using DigitalBallotPlatform.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
@@ -18,6 +20,14 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 if (model == null)
                 {
                     return false;
+                }
+
+                // Specific logic for PlatformUserModel
+                if (model is PlatformUserModel user)
+                {
+                    // Encrypt the password before saving
+                    var encryptionService = new UserPasswordEncryption(user.Password);
+                    user.Password = encryptionService.HashPassword;
                 }
 
                 await Context.Set<TEntity>().AddAsync(model);

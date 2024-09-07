@@ -4,6 +4,7 @@ using DigitalBallotPlatform.Domain.Data.Interfaces;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
@@ -14,7 +15,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                BallotSpecModel? ballotSpec = await Context.BallotSpecs.FirstOrDefaultAsyncEF(b => b.Id == ballotSpecDTO.Id);
+                BallotSpecModel? ballotSpec = await Context.BallotSpecs.AsNoTracking().FirstOrDefaultAsyncEF(b => b.Id == ballotSpecDTO.Id);
                 if (ballotSpec == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
@@ -37,11 +38,11 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             }
         }
 
-        public async Task<BallotSpecDTO?> GetBallotSpecByIdAsync(int id)
+        public async Task<BallotSpecModel?> GetBallotSpecByIdAsync(int id)
         {
             try
             {
-                BallotSpecModel? ballotSpec = await Context.BallotSpecs.FirstOrDefaultAsyncEF(b => b.Id == id);
+                BallotSpecModel? ballotSpec = await Context.BallotSpecs.AsNoTracking().FirstOrDefaultAsyncEF(b => b.Id == id);
 
                 if (ballotSpec == null)
                 {
@@ -51,7 +52,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
 
                 Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(BallotSpecModel), nameof(GetBallotSpecByIdAsync), id);
 
-                return await BallotSpecDTO.MapBallotSpecDto(ballotSpec);
+                return ballotSpec;
             }
             catch (Exception ex)
             {

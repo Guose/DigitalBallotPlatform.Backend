@@ -11,5 +11,6 @@
         Provisional = 6,
         Test = 7,
         Testdeck = 8,
+        None = 100,
     }
 }

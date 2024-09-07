@@ -13,9 +13,8 @@ namespace DigitalBallotPlatform.Platform.DTOs
         public int? CompanyId { get; set; }
 
         public RoleDTO() { }
-        public RoleDTO(int id, RoleTypes role, string description,DateTime updatedAt, bool enabled, int companyId)
+        public RoleDTO(RoleTypes role, string description,DateTime updatedAt, bool enabled, int companyId)
         {
-            Id = id;
             Role = role;
             Description = description;
             UpdatedAt = updatedAt;
@@ -27,7 +26,6 @@ namespace DigitalBallotPlatform.Platform.DTOs
         {
             return await Task.Run(() => new RoleModel
             {
-                Id = roleDTO.Id,
                 Role = roleDTO.Role,
                 Description = roleDTO.Description,
                 Enabled = roleDTO.Enabled,

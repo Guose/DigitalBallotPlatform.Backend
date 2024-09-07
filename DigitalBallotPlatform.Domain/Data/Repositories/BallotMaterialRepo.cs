@@ -4,6 +4,7 @@ using DigitalBallotPlatform.Domain.Data.Interfaces;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
@@ -14,7 +15,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                BallotMaterialModel? ballotMaterial = await Context.BallotMaterials.FirstOrDefaultAsyncEF(b => b.Id == ballotMaterialDTO.Id);
+                BallotMaterialModel? ballotMaterial = await Context.BallotMaterials.AsNoTracking().FirstOrDefaultAsyncEF(b => b.Id == ballotMaterialDTO.Id);
                 if (ballotMaterial == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
@@ -26,8 +27,6 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
                 Context.BallotMaterials.Update(ballotMaterial);
                 await SaveAsync();
 
-                Logger.LogInformation("[INFO] {1} Message: Entity {0} has been updated", nameof(BallotMaterialModel), nameof(ExecuteUpdateAsync));
-
                 return true;
             }
             catch (Exception ex)
@@ -37,11 +36,11 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
             }
         }
 
-        public async Task<BallotMaterialDTO?> GetBallotMaterialByIdAsync(int id)
+        public async Task<BallotMaterialModel?> GetBallotMaterialByIdAsync(int id)
         {
             try
             {
-                BallotMaterialModel? ballotmaterial = await Context.BallotMaterials.FirstOrDefaultAsyncEF(b => b.Id == id);
+                BallotMaterialModel? ballotmaterial = await Context.BallotMaterials.AsNoTracking().FirstOrDefaultAsyncEF(b => b.Id == id);
 
                 if (ballotmaterial == null)
                 {
@@ -51,7 +50,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
 
                 Logger.LogInformation("[INFO] {1} Message: Entity {0} query for Id: {2} was successfull", nameof(BallotMaterialModel), nameof(GetBallotMaterialByIdAsync), id);
 
-                return await BallotMaterialDTO.MapBallotMaterialDto(ballotmaterial);
+                return ballotmaterial;
             }
             catch (Exception ex)
             {

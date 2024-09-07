@@ -21,7 +21,7 @@ namespace DigitalBallotPlatform.Election.Queries
             {
                 IEnumerable<PartyModel> parties = await context.Parties!.ToListAsync();
 
-                return parties.Select(p => new PartyDTO(p.Id, p.Name, p.Acronym, (int)p.ElectionId!));
+                return parties.Select(p => new PartyDTO(p.Id, p.Name, p.Acronym, (int)p.ElectionId!, p.WatermarkColorId));
             }
         }
 
@@ -31,7 +31,7 @@ namespace DigitalBallotPlatform.Election.Queries
             {
                 PartyModel party = await context.Parties.FirstAsync(p => p.Id == id);
 
-                return new PartyDTO(party.Id, party.Name, party.Acronym, (int)party.ElectionId!);
+                return new PartyDTO(party.Id, party.Name, party.Acronym, (int)party.ElectionId!, party.WatermarkColorId);
             }
         }
     }

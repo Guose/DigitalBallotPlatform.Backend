@@ -4,17 +4,18 @@ using DigitalBallotPlatform.Election.DTOs;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
     public class ElectionSetupRepo(ElectionDbContext context, ILogger logger) : 
-        GenericRepository<ElectionSetupDTO, ElectionDbContext>(context, logger), IElectionSetupRepo
+        GenericRepository<ElectionSetupModel, ElectionDbContext>(context, logger), IElectionSetupRepo
     {
         public async Task<bool> ExecuteUpdateAsync(ElectionSetupDTO electionSetupDTO)
         {
             try
             {
-                ElectionSetupModel? electionSetup = await Context.ElectionSetups.FirstOrDefaultAsyncEF(e => e.Id == electionSetupDTO.Id);
+                ElectionSetupModel? electionSetup = await Context.ElectionSetups.AsNoTracking().FirstOrDefaultAsyncEF(e => e.Id == electionSetupDTO.Id);
                 if (electionSetup == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
@@ -42,7 +43,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                ElectionSetupModel? electionSetup = await Context.ElectionSetups.FirstOrDefaultAsyncEF(e => e.Id == id);
+                ElectionSetupModel? electionSetup = await Context.ElectionSetups.AsNoTracking().FirstOrDefaultAsyncEF(e => e.Id == id);
 
                 if (electionSetup == null)
                 {

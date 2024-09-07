@@ -9,9 +9,8 @@ namespace DigitalBallotPlatform.Watermark.DTOs
         public string? Description { get; set; }
 
         public WatermarkDTO() { }
-        public WatermarkDTO(int id, string name, string description)
+        public WatermarkDTO(string name, string description)
         {
-            Id = id;
             Name = name;
             Description = description;
         }
@@ -20,7 +19,6 @@ namespace DigitalBallotPlatform.Watermark.DTOs
         {
             return await Task.Run(() => new WatermarkModel
             {
-                Id = watermarkDTO.Id,
                 Name = watermarkDTO.Name,
                 Description = watermarkDTO.Description,
             });

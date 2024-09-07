@@ -4,17 +4,18 @@ using DigitalBallotPlatform.Domain.Data.Interfaces;
 using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
     public class CompanyRepo(ElectionDbContext context, ILogger logger) :
-        GenericRepository<CompanyDTO, ElectionDbContext>(context, logger), ICompanyRepo
+        GenericRepository<CompanyModel, ElectionDbContext>(context, logger), ICompanyRepo
     {
         public async Task<bool> ExecuteUpdateAsync(CompanyDTO companyDto)
         {
             try
             {
-                CompanyModel? company = await Context.Companies.FirstOrDefaultAsyncEF(c => c.Id == companyDto.Id);
+                CompanyModel? company = await Context.Companies.AsNoTracking().FirstOrDefaultAsyncEF(c => c.Id == companyDto.Id);
                 if (company == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
@@ -41,7 +42,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                CompanyModel? company = await Context.Companies.FirstOrDefaultAsyncEF(c => c.Id == id);
+                CompanyModel? company = await Context.Companies.AsNoTracking().FirstOrDefaultAsyncEF(c => c.Id == id);
                 if (company == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(GetCompanyByIdAsync), this);

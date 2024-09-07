@@ -15,9 +15,8 @@ namespace DigitalBallotPlatform.Ballot.DTOs
         public List<BallotCategoryDTO> BallotCategories { get; set; } = [];
 
         public BallotSpecDTO() { }
-        public BallotSpecDTO(int id, float length, float width, int pages, float stubSize, bool isTopStub, bool isDuplex, int ballotMaterialId)
+        public BallotSpecDTO(float length, float width, int pages, float stubSize, bool isTopStub, bool isDuplex, int ballotMaterialId)
         {
-            Id = id;
             Length = length;
             Width = width;
             Pages = pages;
@@ -31,7 +30,6 @@ namespace DigitalBallotPlatform.Ballot.DTOs
         {
             return await Task.Run(() => new BallotSpecModel
             {
-                Id = model.Id,
                 Length = model.Length,
                 Width = model.Width,
                 Pages = model.Pages,

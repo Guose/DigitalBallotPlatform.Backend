@@ -10,9 +10,8 @@ namespace DigitalBallotPlatform.Ballot.DTOs
         public int CompanyId { get; set; }
 
         public BallotMaterialDTO() { }
-        public BallotMaterialDTO(int id, int weight, bool isTextWeight, int companyId)
+        public BallotMaterialDTO(int weight, bool isTextWeight, int companyId)
         {
-            Id = id;
             Weight = weight;
             IsTextWeight = isTextWeight;
             CompanyId = companyId;
@@ -22,7 +21,6 @@ namespace DigitalBallotPlatform.Ballot.DTOs
         {
             return await Task.Run(() => new BallotMaterialModel
             {
-                Id = ballotMaterialsDto.Id,
                 Weight = ballotMaterialsDto.Weight,
                 IsTextWeight = ballotMaterialsDto.IsTextWeight,
                 CompanyId = ballotMaterialsDto.CompanyId

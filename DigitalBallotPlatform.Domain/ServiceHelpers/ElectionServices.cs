@@ -69,9 +69,9 @@ namespace DigitalBallotPlatform.Domain.ServiceHelpers
                     BallotCategories = ballotSpec.BallotCategories.Select(bc => new BallotCategoryDTO
                     {
                         Id = bc.Id,
-                        Category = bc.Category,
-                        SubCategory = bc.SubCategory,
-                        LARotation = bc.LARotation,
+                        Category = bc.Category.ToString(),
+                        SubCategory = bc.SubCategory.ToString(),
+                        LARotation = bc.LARotation.ToString(),
                         Description = bc.Description,
                         IsTestdeck = bc.IsTestdeck,
                         Enabled = bc.Enabled,

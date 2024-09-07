@@ -11,9 +11,8 @@ namespace DigitalBallotPlatform.Watermark.DTOs
         public List<PartyModel>? Parties { get; set; }
 
         public WatermarkColorDTO() { }
-        public WatermarkColorDTO(int id, string color, string tint, bool hasHeaderFill)
+        public WatermarkColorDTO(string color, string tint, bool hasHeaderFill)
         {
-            Id = id;
             Color = color;
             Tint = tint;
             HasHeaderFill = hasHeaderFill;
@@ -24,7 +23,6 @@ namespace DigitalBallotPlatform.Watermark.DTOs
         {
             return await Task.Run(() => new WatermarkColorModel
             {
-                Id = watermarkColorDTO.Id,
                 Color = watermarkColorDTO.Color,
                 Tint = watermarkColorDTO.Tint,
                 HasHeaderFill = watermarkColorDTO.HasHeaderFill,

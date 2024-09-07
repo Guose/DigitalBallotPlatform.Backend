@@ -4,17 +4,18 @@ using DigitalBallotPlatform.Shared.Logger;
 using DigitalBallotPlatform.Shared.Models;
 using DigitalBallotPlatform.Watermark.DTOs;
 using LinqToDB.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBallotPlatform.Domain.Data.Repositories
 {
     public class WatermarkRepo(ElectionDbContext context, ILogger logger) : 
-        GenericRepository<WatermarkDTO, ElectionDbContext>(context, logger), IWatermarkRepo
+        GenericRepository<WatermarkModel, ElectionDbContext>(context, logger), IWatermarkRepo
     {
         public async Task<bool> ExecuteUpdateAsync(WatermarkDTO watermarkDTO)
         {
             try
             {
-                WatermarkModel? watermark = await Context.Watermarks.FirstOrDefaultAsyncEF(w => w.Id == watermarkDTO.Id);
+                WatermarkModel? watermark = await Context.Watermarks.AsNoTracking().FirstOrDefaultAsyncEF(w => w.Id == watermarkDTO.Id);
                 if (watermark == null)
                 {
                     Logger.LogWarning("[WARN] {0} {1} Entity could not be found in the database.", nameof(ExecuteUpdateAsync), this);
@@ -41,7 +42,7 @@ namespace DigitalBallotPlatform.Domain.Data.Repositories
         {
             try
             {
-                WatermarkModel? watermark = await Context.Watermarks.FirstOrDefaultAsyncEF(w => w.Id == id);
+                WatermarkModel? watermark = await Context.Watermarks.AsNoTracking().FirstOrDefaultAsyncEF(w => w.Id == id);
 
                 if (watermark == null)
                 {

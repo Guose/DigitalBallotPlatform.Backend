@@ -6,25 +6,24 @@ namespace DigitalBallotPlatform.Ballot.DTOs
     public class BallotCategoryDTO
     {
         public int Id { get; set; }
-        public BallotCategoryType Category { get; set; }
-        public SubCategoryType? SubCategory { get; set; }
-        public LATestDeckType? LARotation { get; set; }
+        public string Category { get; set; } = string.Empty;
+        public string? SubCategory { get; set; }
+        public string? LARotation { get; set; }
         public string Description { get; set; } = string.Empty;
         public bool IsTestdeck { get; set; }
         public bool Enabled { get; set; }
         public int BallotSpecId { get; set; }
 
         public BallotCategoryDTO() { }
-        public BallotCategoryDTO(int id,
-            BallotCategoryType category,
-            SubCategoryType subCategory,
-            LATestDeckType laRotation,
+        public BallotCategoryDTO(
+            string category,
+            string subCategory,
+            string laRotation,
             string description,
             bool isTestdeck,
             bool enabled,
             int ballotSpecId)
         {
-            Id = id;
             Category = category;
             SubCategory = subCategory;
             LARotation = laRotation;
@@ -38,10 +37,9 @@ namespace DigitalBallotPlatform.Ballot.DTOs
         {
             return await Task.Run(() => new BallotCategoryModel
             {
-                Id = ballotCategoryDto.Id,
-                Category = ballotCategoryDto.Category,
-                SubCategory = ballotCategoryDto.SubCategory,
-                LARotation = ballotCategoryDto.LARotation,
+                Category = (BallotCategoryType)Enum.Parse(typeof(BallotCategoryType), ballotCategoryDto.Category),
+                SubCategory = (SubCategoryType)Enum.Parse(typeof(SubCategoryType), ballotCategoryDto.SubCategory!),
+                LARotation = (LATestDeckType)Enum.Parse(typeof(LATestDeckType), ballotCategoryDto.LARotation!),
                 Description = ballotCategoryDto.Description,
                 IsTestdeck = ballotCategoryDto.IsTestdeck,
                 Enabled = ballotCategoryDto.Enabled,
@@ -54,9 +52,9 @@ namespace DigitalBallotPlatform.Ballot.DTOs
             return await Task.Run(() => new BallotCategoryDTO
             {
                 Id = ballotCategory.Id,
-                Category = ballotCategory.Category,
-                SubCategory = ballotCategory.SubCategory,
-                LARotation = ballotCategory.LARotation,
+                Category = ballotCategory.Category.ToString(),
+                SubCategory = ballotCategory.SubCategory.ToString(),
+                LARotation = ballotCategory.LARotation.ToString(),
                 Description = ballotCategory.Description,
                 IsTestdeck = ballotCategory.IsTestdeck,
                 Enabled = ballotCategory.Enabled,
