@@ -2,6 +2,6 @@
 {
     public interface IUpdateCommand<T>
     {
-        Task<T> ExecuteUpdateAsync(T obj);
+        Task ExecuteUpdateAsync(T obj);
     }
 }

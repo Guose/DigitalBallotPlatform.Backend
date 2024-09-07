@@ -6,6 +6,7 @@ namespace DigitalBallotPlatform.Shared.Models
     public class BallotMaterialModel
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public int Weight { get; set; }

@@ -11,7 +11,7 @@ namespace DigitalBallotPlatform.DataAccess.Context
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<ElectionSetupModel> ElectionSetup => Set<ElectionSetupModel>();
+        public DbSet<ElectionSetupModel> ElectionSetups => Set<ElectionSetupModel>();
         public DbSet<CountyModel> Counties => Set<CountyModel>();
         public DbSet<PartyModel> Parties => Set<PartyModel>();
         public DbSet<WatermarkColorModel> WatermarkColors => Set<WatermarkColorModel>();
